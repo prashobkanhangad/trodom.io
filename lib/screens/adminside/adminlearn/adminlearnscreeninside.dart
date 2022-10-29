@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:tradom_io/db/function/learn/learnfunctions.dart';
+import 'package:tradom_io/screens/adminside/adminlearn/editlearnscreen.dart';
 
 import '../adminnavbar/adminnavbar.dart';
 
@@ -34,20 +35,26 @@ class AdminlearninsideScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Color.fromARGB(255, 34, 86, 133),
-                    ),
-                    width: 150,
-                    height: 40,
-                    child: const Center(
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EditlearnScreen(index: id)));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Color.fromARGB(255, 34, 86, 133),
+                      ),
+                      width: 150,
+                      height: 40,
+                      child: const Center(
+                        child: Text(
+                          'Edit',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),

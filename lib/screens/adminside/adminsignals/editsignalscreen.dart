@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tradom_io/db/function/signal/signalfunctions.dart';
 import 'package:tradom_io/db/model/signalmodel/signaldatamodel.dart';
@@ -11,11 +12,12 @@ final ImagePicker picker = ImagePicker();
 XFile? signalimagefile;
 
 class EditsignalScreen extends StatefulWidget {
-  int id;
+  final index;
   String signaltitle, signalimage;
+
   EditsignalScreen(
       {super.key,
-      required this.id,
+      required this.index,
       required this.signaltitle,
       required this.signalimage});
 
@@ -26,6 +28,7 @@ class EditsignalScreen extends StatefulWidget {
 class _AddingsignalState extends State<EditsignalScreen> {
   @override
   final _signaltitlecontroller = TextEditingController();
+  String inititial_value = 'kanhangad';
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,8 @@ class _AddingsignalState extends State<EditsignalScreen> {
         valueListenable: signalsnotifier,
         builder:
             (BuildContext ctx, List<signalmodel> signallist, Widget? child) {
+          // final signaldata = signallist[signallist.length - 1];
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 34, 86, 133),
@@ -43,8 +48,9 @@ class _AddingsignalState extends State<EditsignalScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: TextField(
+                  child: TextFormField(
                     onChanged: (value) {},
+                    // initialValue: 'inititial_value',
                     controller: _signaltitlecontroller,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
@@ -79,7 +85,7 @@ class _AddingsignalState extends State<EditsignalScreen> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      // onsignalsubmitbuttonpressed();
+                      onsignalsubmitbuttonpressed(widget.index);
                       // editsignal(widget.id, );
 
                       Navigator.of(context).push(MaterialPageRoute(
@@ -95,7 +101,9 @@ class _AddingsignalState extends State<EditsignalScreen> {
         });
   }
 
-  onsignalsubmitbuttonpressed() {
+  onsignalsubmitbuttonpressed(index) async {
+    final signaldb = await Hive.openBox<signalmodel>('signal_db');
+
     final _signaltitle = _signaltitlecontroller.text;
     final _signalimage = signalimagefile!.path.toString();
 
@@ -103,11 +111,12 @@ class _AddingsignalState extends State<EditsignalScreen> {
       return;
     }
     final _signaldata = signalmodel(
-        signaltitle: _signaltitle,
-        signalimage: _signalimage,
-        id: DateTime.now().millisecondsSinceEpoch);
+        signaltitle: _signaltitle, signalimage: _signalimage, id: index);
+    await signaldb.putAt(index, _signaldata);
 
-    addsignal(_signaldata);
+    getsignal();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Updated Successfully')));
   }
 
   Future<void> picsignalimagefromGallery() async {

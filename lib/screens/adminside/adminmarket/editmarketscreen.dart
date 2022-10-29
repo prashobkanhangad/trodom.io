@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:tradom_io/db/function/market/marketfunctions.dart';
@@ -9,16 +10,15 @@ import '../adminnavbar/adminnavbar.dart';
 
 XFile? marketimagefile;
 
-class AddingmarketScreen extends StatefulWidget {
-  AddingmarketScreen({
-    super.key,
-  });
+class EditmarketScreen extends StatefulWidget {
+  final index;
+  EditmarketScreen({super.key, required this.index});
 
   @override
-  State<AddingmarketScreen> createState() => _AddingmarketScreenState();
+  State<EditmarketScreen> createState() => _AddingmarketScreenState();
 }
 
-class _AddingmarketScreenState extends State<AddingmarketScreen> {
+class _AddingmarketScreenState extends State<EditmarketScreen> {
   final _markettitlecontroller = TextEditingController();
 
   final _marketnewscontroller = TextEditingController();
@@ -29,8 +29,8 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 34, 86, 133),
-        title: Text('Tradom.io'),
+        backgroundColor: const Color.fromARGB(255, 34, 86, 133),
+        title: const Text('Tradom.io'),
         centerTitle: true,
       ),
       body: Container(
@@ -48,7 +48,7 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4)),
                   hintText: 'Add Title Here',
-                  hintStyle: TextStyle(fontSize: 17),
+                  hintStyle: const TextStyle(fontSize: 17),
                 ),
               ),
             ),
@@ -73,7 +73,8 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
             Row(
               children: [
                 Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                     // height: MediaQuery.of(context).size.width / 3,
                     width: MediaQuery.of(context).size.width / 2.4,
                     child: Center(
@@ -105,25 +106,34 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
                         } else {}
                       },
                     ))),
-                Spacer(),
-                const Text(
-                  'Upload Photo',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const Spacer(),
-                IconButton(
-                    onPressed: () {
-                      picmarketimagefromGallery();
-                    },
-                    icon: Icon(Icons.camera_alt)),
+                Spacer()
               ],
             ),
 
+            //
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10),
+              child: Row(
+                children: [
+                  const Text(
+                    'Upload Photo',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        picmarketimagefromGallery();
+                      },
+                      icon: Icon(Icons.camera_alt)),
+                ],
+              ),
+            ),
             SizedBox(
                 width: 150,
                 child: ElevatedButton(
                     onPressed: () {
-                      onmarketsubmitbuttonpressed();
+                      onmarketsubmitbuttonpressed(widget.index);
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => AdminnavbarScreen(
                           passingselectedindex: 3,
@@ -137,7 +147,9 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
     );
   }
 
-  onmarketsubmitbuttonpressed() {
+  onmarketsubmitbuttonpressed(index) async {
+    final marketdb = await Hive.openBox<marketmodel>('market_db');
+
     final _markettitle = _markettitlecontroller.text;
     final _marketnews = _marketnewscontroller.text;
     final _marketimage = marketimagefile!.path.toString();
@@ -152,7 +164,7 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
         marketimage: _marketimage,
         marketdate: _marketdate);
 
-    addmarket(_marketdata);
+    marketdb.putAt(index, _marketdata);
   }
 
   Future<void> picmarketimagefromGallery() async {

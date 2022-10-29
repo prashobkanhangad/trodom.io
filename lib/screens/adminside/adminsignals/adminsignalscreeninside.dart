@@ -38,7 +38,7 @@ class AdminsignalinsideScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => EditsignalScreen(
-                                id: id,
+                                index: id,
                                 signaltitle: title,
                                 signalimage: signalimage,
                               )));

@@ -15,9 +15,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController mobilecontroller = new TextEditingController();
+  final TextEditingController mobilecontroller = TextEditingController();
 
-  final TextEditingController otpcontroller = new TextEditingController();
+  final TextEditingController otpcontroller = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
@@ -49,15 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 TextFormField(
                   controller: mobilecontroller,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return ('please enter mobile number');
                     }
-                    if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                        .hasMatch(value)) {
-                      return ("Please Enter a valid email");
-                    }
+                    // if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                    //     .hasMatch(value)) {
+                    //   return ("Please Enter a valid email");
+                    // }
                     return null;
                   },
                   onSaved: (value) {
@@ -79,6 +79,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormField(
                   controller: otpcontroller,
                   keyboardType: TextInputType.number,
+                  // validator: (String? value) {
+                  //   if (value == null || value.isEmpty) {
+                  //     return 'Please enter some text';
+                  //   }
+                  //   return null;
+                  // },
                   validator: (value) {
                     RegExp regex = new RegExp(r'^.{6,}$');
                     if (value!.isEmpty) {
@@ -107,11 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.maxFinite,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: () {
-                      signin(mobilecontroller.text, otpcontroller.text);
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      //     builder: ((context) => const BottomnavScreen())));
-                    },
+                    onPressed: () =>
+                        // signin(mobilecontroller.text, otpcontroller.text),
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: ((context) => const BottomnavScreen()))),
                     style: ElevatedButton.styleFrom(
                         backgroundColor:
                             const Color.fromARGB(255, 186, 255, 250),
@@ -141,19 +146,26 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void signin(String email, String password) async {
-    if (_formKey.currentState!.validate()) {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Sussesfull"),
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => BottomnavScreen(),
-                ))
-              })
-          .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
-      });
-    }
-  }
+  // void signin(String email, String password) async {
+  //   // if (_formKey.currentState == null) {
+  //   //   return;
+
+  //   // }
+  //   if (_formKey.currentState!.validate()) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(const SnackBar(content: Text('Processing Data')));
+  //     await _auth
+  //         .signInWithEmailAndPassword(email: email, password: password)
+  //         // .signInWithPhoneNumber(phoneNumber)
+  //         .then((uid) => {
+  //               Fluttertoast.showToast(msg: "Login Sussesfull"),
+  //               Navigator.of(context).pushReplacement(MaterialPageRoute(
+  //                 builder: (context) => BottomnavScreen(),
+  //               ))
+  //             })
+  //         .catchError((e) {
+  //       Fluttertoast.showToast(msg: e!.message);
+  //     });
+  //   }
+  // }
 }

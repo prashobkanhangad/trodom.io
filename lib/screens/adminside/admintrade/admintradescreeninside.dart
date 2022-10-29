@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
+import 'package:tradom_io/screens/adminside/admintrade/edittradescreen.dart';
 
 import '../adminnavbar/adminnavbar.dart';
 
@@ -37,20 +38,25 @@ class AdmintradeinsideScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: const Color.fromARGB(255, 34, 86, 133),
-                    ),
-                    width: 150,
-                    height: 40,
-                    child: const Center(
-                      child: Text(
-                        'Edit',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => EdittradeideaSCreen(index: id),
+                    )),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: const Color.fromARGB(255, 34, 86, 133),
+                      ),
+                      width: 150,
+                      height: 40,
+                      child: const Center(
+                        child: Text(
+                          'Edit',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),

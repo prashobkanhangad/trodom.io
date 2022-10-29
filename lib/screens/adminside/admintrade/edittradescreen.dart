@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
 import 'package:tradom_io/db/model/tradeideamodel/tradeideadatamodel.dart';
 import 'package:tradom_io/screens/adminside/admintrade/radiobutton.dart';
 
 import '../adminnavbar/adminnavbar.dart';
 
-class AddingtradeSCreen extends StatelessWidget {
-  AddingtradeSCreen({super.key});
+class EdittradeideaSCreen extends StatelessWidget {
+  final index;
+  EdittradeideaSCreen({super.key, required this.index});
 
   final _stoplosscontroller = TextEditingController();
   final _entrypricecontroller = TextEditingController();
@@ -22,8 +24,8 @@ class AddingtradeSCreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 34, 86, 133),
-        title: const Text('Tradom.io'),
+        backgroundColor: Color.fromARGB(255, 34, 86, 133),
+        title: Text('Tradom.io'),
         centerTitle: true,
       ),
       body: Padding(
@@ -179,7 +181,7 @@ class AddingtradeSCreen extends StatelessWidget {
                     width: 150,
                     child: ElevatedButton(
                         onPressed: () {
-                          ontradingsubmitbuttonpressed();
+                          ontradingsubmitbuttonpressed(index);
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => AdminnavbarScreen(
                               passingselectedindex: 0,
@@ -204,7 +206,9 @@ class AddingtradeSCreen extends StatelessWidget {
     );
   }
 
-  ontradingsubmitbuttonpressed() {
+  ontradingsubmitbuttonpressed(index) async {
+    final tradeideadb = await Hive.openBox<tradeideamodel>('tradeidea_db');
+
     final _stoploss = _stoplosscontroller.text;
     final _entryprice = _entrypricecontroller.text;
     final _targetprice = _targetpricecontroller.text;
@@ -223,6 +227,9 @@ class AddingtradeSCreen extends StatelessWidget {
         stoploss: _stoploss,
         entryprice: _entryprice,
         targetprice: _targetprice);
-    addtradeidea(_tradeideas);
+    await tradeideadb.putAt(index, _tradeideas);
+
+    gettradeidea();
+
   }
 }
