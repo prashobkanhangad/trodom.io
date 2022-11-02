@@ -1,4 +1,10 @@
+import 'dart:developer';
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/model/usermodel/usermodel.dart';
 
 import '../loginscreen/loginscreen.dart';
 
@@ -10,6 +16,24 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _SideScreenState extends State<DrawerScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInuser = UserModel();
+  
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInuser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -19,7 +43,7 @@ class _SideScreenState extends State<DrawerScreen> {
           children: [
             Row(
               children: [
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -45,27 +69,29 @@ class _SideScreenState extends State<DrawerScreen> {
                     Container(
                         width: 100,
                         height: 100,
-                        child: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.camera_alt)),
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 239, 238, 238),
+                          color: const Color.fromARGB(255, 239, 238, 238),
                           border: Border.all(
                               width: 2,
-                              color: Color.fromARGB(255, 31, 132, 122)),
-                        )),
+                              color:const Color.fromARGB(255, 31, 132, 122)),
+                        ),
+                        child: IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.camera_alt))),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
-                      'Name',
+                    Text(
+                      ' ${loggedInuser.name}',
+                      
                       style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
+
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Mobile_No',
-                        style: TextStyle(
+                    Text('${loggedInuser.email}',
+                        style: const TextStyle(
                           fontSize: 22,
                         )),
                     const SizedBox(
@@ -186,13 +212,7 @@ class _SideScreenState extends State<DrawerScreen> {
                           builder: (context) => AlertDialog(
                             title: Text('Are you sure you want to logout?'),
                             actions: [
-                              TextButton(
-                                  onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
-                                      ),
-                                  child: Text('Yes')),
+                              TextButton(onPressed: logout, child: Text('Yes')),
                               TextButton(
                                   onPressed: () => Navigator.of(context).pop(),
                                   child: Text('No'))
@@ -222,6 +242,13 @@ class _SideScreenState extends State<DrawerScreen> {
           ),
         ),
       ],
+    ));
+  }
+
+  Future logout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => LoginScreen(),
     ));
   }
 }

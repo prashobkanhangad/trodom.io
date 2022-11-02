@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,6 +26,7 @@ class _AddinglaernScreenState extends State<AddinglaernScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 34, 86, 133),
         title: const Text('Tradom.io'),
@@ -66,6 +67,23 @@ class _AddinglaernScreenState extends State<AddinglaernScreen> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), border: Border.all()),
+              height: 200,
+              width: double.maxFinite,
+              child: learnimagefile == null
+                  ? Center(child: Text('No Image Found'))
+                  : Image(
+                      fit: BoxFit.cover,
+                      image: FileImage(File(learnimagefile!.path.toString()))),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               children: [
@@ -82,16 +100,19 @@ class _AddinglaernScreenState extends State<AddinglaernScreen> {
               ],
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                onlearnsubmitbuttonpressed();
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AdminnavbarScreen(
-                    passingselectedindex: 4,
-                  ),
-                ));
-              },
-              child: Text('Submit'))
+          SizedBox(
+            width: 80,
+            child: ElevatedButton(
+                onPressed: () {
+                  onlearnsubmitbuttonpressed();
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AdminnavbarScreen(
+                      passingselectedindex: 4,
+                    ),
+                  ));
+                },
+                child: Text('Submit')),
+          )
         ],
       ),
     );

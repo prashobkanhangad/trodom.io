@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tradom_io/db/function/signal/signalfunctions.dart';
 import 'package:tradom_io/db/model/signalmodel/signaldatamodel.dart';
+import 'package:tradom_io/screens/adminside/adminsignals/editsignalscreen.dart';
 
 import '../adminnavbar/adminnavbar.dart';
 
@@ -65,16 +67,42 @@ class _AddingsignalState extends State<Addingsignal> {
               ],
             ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                onsignalsubmitbuttonpressed();
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AdminnavbarScreen(
-                    passingselectedindex: 1,
-                  ),
-                ));
-              },
-              child: Text('Submit'))
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 13.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), border: Border.all()),
+              height: 200,
+              width: double.maxFinite,
+              child: signalimagefile == null
+                  ? Center(child: Text('No Image Found'))
+                  : Image(
+                      fit: BoxFit.cover,
+                      image: FileImage(File(signalimagefile!.path.toString()))),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            width: 100,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                      Color.fromARGB(255, 34, 86, 133)),
+                ),
+                onPressed: () {
+                  onsignalsubmitbuttonpressed();
+                  setState(() {
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AdminnavbarScreen(
+                      passingselectedindex: 1,
+                    ),
+                  ));
+                },
+                child: Text('Submit')),
+          )
         ],
       ),
     );

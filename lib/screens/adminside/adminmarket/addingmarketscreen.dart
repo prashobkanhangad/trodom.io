@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -28,6 +30,7 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 34, 86, 133),
         title: Text('Tradom.io'),
@@ -118,7 +121,25 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
                     icon: Icon(Icons.camera_alt)),
               ],
             ),
-
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all()),
+                height: 200,
+                width: double.maxFinite,
+                child: marketimagefile == null
+                    ? Center(child: Text('No Image Found'))
+                    : Image(
+                        fit: BoxFit.cover,
+                        image:
+                            FileImage(File(marketimagefile!.path.toString()))),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             SizedBox(
                 width: 150,
                 child: ElevatedButton(

@@ -28,7 +28,6 @@ class EditsignalScreen extends StatefulWidget {
 class _AddingsignalState extends State<EditsignalScreen> {
   @override
   final _signaltitlecontroller = TextEditingController();
-  String inititial_value = 'kanhangad';
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,10 @@ class _AddingsignalState extends State<EditsignalScreen> {
         valueListenable: signalsnotifier,
         builder:
             (BuildContext ctx, List<signalmodel> signallist, Widget? child) {
-          // final signaldata = signallist[signallist.length - 1];
+          final signaldata = signallist[signallist.length - 1];
+          final index = widget.index;
+
+          // _signaltitlecontroller.text = ;
 
           return Scaffold(
             appBar: AppBar(
@@ -102,6 +104,7 @@ class _AddingsignalState extends State<EditsignalScreen> {
   }
 
   onsignalsubmitbuttonpressed(index) async {
+
     final signaldb = await Hive.openBox<signalmodel>('signal_db');
 
     final _signaltitle = _signaltitlecontroller.text;

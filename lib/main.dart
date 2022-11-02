@@ -40,7 +40,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(backgroundColor: Colors.white),
+      theme: ThemeData(
+          backgroundColor: Colors.white,
+          inputDecorationTheme:
+              InputDecorationTheme(errorStyle: TextStyle(color: Colors.white))),
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
