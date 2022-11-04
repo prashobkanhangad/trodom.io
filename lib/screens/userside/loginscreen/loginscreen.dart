@@ -128,10 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: double.maxFinite,
                     height: 45,
                     child: ElevatedButton(
-                      onPressed: () =>
-                          signin(emailcontroller.text, passwordcontroller.text),
-
-                    
+                      onPressed: () => signin(
+                          emailcontroller.text.trim(), passwordcontroller.text),
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
                               const Color.fromARGB(255, 186, 255, 250),
@@ -161,7 +159,6 @@ class _LoginScreenState extends State<LoginScreen> {
           )),
     );
   }
-
 
   void signin(String email, String password) async {
     if (_formKey.currentState!.validate()) {

@@ -142,7 +142,7 @@ class AdminhomeScreen extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => AdminmarketinsideScreen(
                       id: marketlist.length - 1,
-                      index: marketdata.toString(),
+                      // index: marketdata.toString(),
                       title: marketdata.markettitle,
                       news: marketdata.marketnews,
                       imagenews: marketdata.marketimage),

@@ -264,7 +264,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         height: 45,
                         child: ElevatedButton(
                           onPressed: () {
-                            signup(
+                            signUp(
                                 emailcontroller.text, passwordcontroller.text);
                           },
                           style: ElevatedButton.styleFrom(
@@ -299,14 +299,14 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  void signup(String email, String password) async {
+  void signUp(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => {postDetailsToFirestore()});
-      //       .catchError((e) {
-      //     Fluttertoast.showToast(msg: e!.massage);
-      //   });
+          .then((value) => {postDetailsToFirestore()})
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.massage);
+      });
     }
   }
 
@@ -317,19 +317,20 @@ class _SignupScreenState extends State<SignupScreen> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
-    UserModel usermodel = UserModel();
+    UserModel userModel = UserModel();
 
     // writing all values
 
-    usermodel.email = user!.email;
-    usermodel.uid = user.uid;
-    usermodel.name = namecontroller.text;
-    usermodel.profileimg = uploadimagefile!.path.toString();
+    // userModel.email = user!.email;
+    userModel.email = emailcontroller.text;
+    userModel.uid = user!.uid;
+    userModel.displayName = namecontroller.text;
+    userModel.photoURL = uploadimagefile!.path.toString();
 
     await firebaseFirestore
         .collection("users")
         .doc(user.uid)
-        .set(usermodel.toMap());
+        .set(userModel.toMap());
 
     Fluttertoast.showToast(msg: "Account Created Successfully ");
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../../db/function/tradeideas/tradeidea_functions.dart';
@@ -15,8 +17,8 @@ class LatestTrade extends StatelessWidget {
         builder: (BuildContext ctx, List<tradeideamodel> tradeidealist,
             Widget? child) {
           final tradedata = tradeidealist[tradeidealist.length - 1];
+          log(tradedata.id);
           {
-            
             return Container(
               height: 85,
               width: double.maxFinite,
@@ -26,11 +28,11 @@ class LatestTrade extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text('  Latest Trade - ',
+                      const Text('  Latest Trade - ',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                       Text(tradedata.stockname,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                     ],
                   ),

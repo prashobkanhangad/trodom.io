@@ -59,7 +59,7 @@ class AdminmarketScreen extends StatelessWidget {
                                       title: marketdata.markettitle,
                                       news: marketdata.marketnews,
                                       imagenews: marketdata.marketimage,
-                                      index: index.toString(),
+                                      // index: index.toString(),
                                     );
                                   },
                                 ));

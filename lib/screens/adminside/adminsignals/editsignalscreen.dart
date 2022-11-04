@@ -9,7 +9,7 @@ import 'package:tradom_io/db/model/signalmodel/signaldatamodel.dart';
 import '../adminnavbar/adminnavbar.dart';
 
 final ImagePicker picker = ImagePicker();
-XFile? signalimagefile;
+var signalimagefile;
 
 class EditsignalScreen extends StatefulWidget {
   final index;
@@ -38,7 +38,12 @@ class _AddingsignalState extends State<EditsignalScreen> {
           final signaldata = signallist[signallist.length - 1];
           final index = widget.index;
 
-          // _signaltitlecontroller.text = ;
+          _signaltitlecontroller.text =
+              signalsnotifier.value[index].signaltitle;
+
+          signalimagefile = signalsnotifier.value[index].signalimage;
+
+          // log(signalsnotifier.value[index].signalimage);
 
           return Scaffold(
             appBar: AppBar(
@@ -104,11 +109,14 @@ class _AddingsignalState extends State<EditsignalScreen> {
   }
 
   onsignalsubmitbuttonpressed(index) async {
-
     final signaldb = await Hive.openBox<signalmodel>('signal_db');
 
     final _signaltitle = _signaltitlecontroller.text;
-    final _signalimage = signalimagefile!.path.toString();
+
+    if (signalimagefile == null)
+      final _signalimage = signalimagefile!.path.toString();
+
+    final _signalimage = signalimagefile;
 
     if (_signaltitle.isEmpty) {
       return;

@@ -1,26 +1,28 @@
-import 'dart:developer';
-
 class UserModel {
   String? uid;
   String? email;
-  String? name;
-  String? profileimg;
+  String? displayName;
+  String? photoURL;
 
-  UserModel({this.uid, this.email, this.name, this.profileimg});
+  UserModel({this.uid, this.email, this.displayName, this.photoURL});
 
 //recieving data from server
   factory UserModel.fromMap(map) {
     return UserModel(
-        uid: map('uid'),
-        email: map('email'),
-        name: map('name'),
-        profileimg: map('profileimg'));
-
+        uid: map('uid') as String,
+        email: map('email') as String,
+        displayName: map('displayName') as String,
+        photoURL: map('photoURL') as String);
   }
 
   // sending data to server
 
   Map<String, dynamic> toMap() {
-    return {'uid': uid, 'email': email, 'name': name, 'profileimg': profileimg};
+    return {
+      'uid': uid,
+      'email': email,
+      'displayName': displayName,
+      'photoURL': photoURL
+    };
   }
 }

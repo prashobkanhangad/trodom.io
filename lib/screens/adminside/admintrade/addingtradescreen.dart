@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
 import 'package:tradom_io/db/model/tradeideamodel/tradeideadatamodel.dart';
 import 'package:tradom_io/screens/adminside/admintrade/radiobutton.dart';

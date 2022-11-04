@@ -7,7 +7,7 @@ import 'package:tradom_io/screens/adminside/adminmarket/editmarketscreen.dart';
 import '../adminnavbar/adminnavbar.dart';
 
 class AdminmarketinsideScreen extends StatelessWidget {
-  final String title, news, imagenews, index;
+  final String title, news, imagenews;
   int id;
 
   AdminmarketinsideScreen(
@@ -15,7 +15,7 @@ class AdminmarketinsideScreen extends StatelessWidget {
       required this.title,
       required this.news,
       required this.imagenews,
-      required this.index,
+      // required this.index,
       required this.id});
 
   @override

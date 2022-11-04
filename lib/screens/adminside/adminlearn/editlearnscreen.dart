@@ -21,80 +21,95 @@ class _EditlearnScreenState extends State<EditlearnScreen> {
 
   final _learncontentcontroller = TextEditingController();
 
-  XFile? learnimagefile;
+  var learnimagefile;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 34, 86, 133),
-        title: const Text('Tradom.io'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _learntitlecontroller,
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                focusColor: Colors.black,
-                filled: true,
-                fillColor: Colors.white,
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
-                hintText: 'Add Title Here',
-                hintStyle: const TextStyle(fontSize: 17),
-              ),
+    return ValueListenableBuilder(
+        valueListenable: learnnotifier,
+        builder: (BuildContext ctx, List<learnmodel> learnlist, Widget? child) {
+          final learndata = learnlist[learnlist.length - 1];
+          final index = widget.index;
+
+          _learntitlecontroller.text = learnnotifier.value[index].learntitle;
+          _learncontentcontroller.text =
+              learnnotifier.value[index].learncontent;
+
+          learnimagefile = learnnotifier.value[index].learnimage;
+
+          // log(index);
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: const Color.fromARGB(255, 34, 86, 133),
+              title: const Text('Tradom.io'),
+              centerTitle: true,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _learncontentcontroller,
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                focusColor: Colors.black,
-                filled: true,
-                fillColor: Colors.white,
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
-                hintText: 'Add Content Here',
-                hintStyle: const TextStyle(fontSize: 17),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
+            body: Column(
               children: [
-                const Text(
-                  'Upload Photo',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextField(
+                    controller: _learntitlecontroller,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      focusColor: Colors.black,
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      hintText: 'Add Title Here',
+                      hintStyle: const TextStyle(fontSize: 17),
+                    ),
+                  ),
                 ),
-                const Spacer(),
-                IconButton(
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: TextField(
+                    controller: _learncontentcontroller,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                      focusColor: Colors.black,
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4)),
+                      hintText: 'Add Content Here',
+                      hintStyle: const TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Upload Photo',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            piclearnimagefromGallery();
+                          },
+                          icon: const Icon(Icons.camera_alt)),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
                     onPressed: () {
-                      piclearnimagefromGallery();
+                      onlearnsubmitbuttonpressed(widget.index);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AdminnavbarScreen(
+                          passingselectedindex: 4,
+                        ),
+                      ));
                     },
-                    icon: const Icon(Icons.camera_alt)),
+                    child: Text('Submit'))
               ],
             ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                onlearnsubmitbuttonpressed(widget.index);
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AdminnavbarScreen(
-                    passingselectedindex: 4,
-                  ),
-                ));
-              },
-              child: Text('Submit'))
-        ],
-      ),
-    );
+          );
+        });
   }
 
   onlearnsubmitbuttonpressed(index) async {
@@ -102,7 +117,11 @@ class _EditlearnScreenState extends State<EditlearnScreen> {
 
     final _learntitle = _learntitlecontroller.text;
     final _learncontent = _learncontentcontroller.text;
-    final _learnimage = learnimagefile!.path.toString();
+
+    if (learnimagefile == null) {
+      final _learnimage = learnimagefile!.path.toString();
+    }
+    final _learnimage = learnimagefile;
 
     if (_learntitle.isEmpty || _learncontent.isEmpty) {
       return;
