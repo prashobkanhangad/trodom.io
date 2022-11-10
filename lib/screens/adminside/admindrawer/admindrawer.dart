@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tradom_io/screens/adminside/admindrawer/useremanagement.dart';
 import 'package:tradom_io/screens/adminside/adminlogin/adminloginscreen.dart';
 
 class AdmindrawerScreen extends StatefulWidget {
@@ -42,6 +43,9 @@ class _SideScreenState extends State<AdmindrawerScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
+                        child: Image(
+                            image: NetworkImage(
+                                'https://www.pngmart.com/files/21/Admin-Profile-Vector-PNG-Image.png')),
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
@@ -54,17 +58,17 @@ class _SideScreenState extends State<AdmindrawerScreen> {
                       height: 10,
                     ),
                     const Text(
-                      'Name',
+                      'Admin',
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text('Mobile_No',
-                        style: TextStyle(
-                          fontSize: 22,
-                        )),
+                    // const Text('Mobile_No',
+                    //     style: TextStyle(
+                    //       fontSize: 22,
+                    //     )),
                     const SizedBox(
                       height: 10,
                     ),
@@ -77,7 +81,7 @@ class _SideScreenState extends State<AdmindrawerScreen> {
               ),
               //
               const SizedBox(
-                height: 430,
+                height: 480,
               ),
 
               Padding(
@@ -87,20 +91,25 @@ class _SideScreenState extends State<AdmindrawerScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    Row(
-                      children: const [
-                        Icon(
-                          Icons.delete,
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text('Delete Account',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold))
-                      ],
-                    ),
+                    // GestureDetector(
+                    //   onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => UserManagement(),
+                    //   )),
+                    //   child: Row(
+                    //     children: const [
+                    //       Icon(
+                    //         Icons.account_box_rounded,
+                    //         size: 20,
+                    //       ),
+                    //       SizedBox(
+                    //         width: 10,
+                    //       ),
+                    //       Text('User Management',
+                    //           style: TextStyle(
+                    //               fontSize: 20, fontWeight: FontWeight.bold))
+                    //     ],
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 15,
                     ),

@@ -1,52 +1,58 @@
-import 'package:flutter/material.dart';
+// import 'dart:developer';
 
-enum SingingCharacter { lafayette, jefferson }
+// import 'package:flutter/material.dart';
 
-class TradeScreenmRadiobutton extends StatefulWidget {
-  const TradeScreenmRadiobutton({super.key});
+// enum SingingCharacter { intraday, positional }
 
-  @override
-  State<TradeScreenmRadiobutton> createState() => _MyStatefulWidgetState();
-}
+// class TradeScreenmRadiobutton extends StatefulWidget {
+//   const TradeScreenmRadiobutton({super.key, required super.character});
 
-class _MyStatefulWidgetState extends State<TradeScreenmRadiobutton> {
-  SingingCharacter? _character = SingingCharacter.lafayette;
+//   @override
+//   State<TradeScreenmRadiobutton> createState() => _MyStatefulWidgetState();
+// }
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 180,
-          child: ListTile(
-            title: const Text('Intraday'),
-            leading: Radio<SingingCharacter>(
-              value: SingingCharacter.lafayette,
-              groupValue: _character,
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-              },
-            ),
-          ),
-        ),
-        Container(
-          width: 180,
-          child: ListTile(
-            title: const Text('Positional'),
-            leading: Radio<SingingCharacter>(
-              value: SingingCharacter.jefferson,
-              groupValue: _character,
-              onChanged: (SingingCharacter? value) {
-                setState(() {
-                  _character = value;
-                });
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+// class _MyStatefulWidgetState extends State<TradeScreenmRadiobutton> {
+//   SingingCharacter? character = SingingCharacter.intraday;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // log(character.toString());
+
+//     return 
+    
+//     Row(
+//       children: [
+//         Container(
+//           width: 180,
+//           child: ListTile(
+//             title: const Text('Intraday'),
+//             leading: Radio<SingingCharacter>(
+//               value: SingingCharacter.intraday,
+//               groupValue: character,
+//               onChanged: (SingingCharacter? value) {
+//                 setState(() {
+//                   character = value;
+//                 });
+//               },
+//             ),
+//           ),
+//         ),
+//         Container(
+//           width: 180,
+//           child: ListTile(
+//             title: const Text('Positional'),
+//             leading: Radio<SingingCharacter>(
+//               value: SingingCharacter.positional,
+//               groupValue: character,
+//               onChanged: (SingingCharacter? value) {
+//                 setState(() {
+//                   character = value;
+//                 });
+//               },
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

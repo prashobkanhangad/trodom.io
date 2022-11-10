@@ -157,10 +157,15 @@ class AdminhomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          child: Image(
-                              height: 200,
-                              fit: BoxFit.cover,
-                              image: FileImage(File(marketdata.marketimage)))),
+                        child: Image(
+                          width: double.maxFinite,
+                          height: 200,
+                          fit: BoxFit.cover,
+                          image: FileImage(
+                            File(marketdata.marketimage),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(

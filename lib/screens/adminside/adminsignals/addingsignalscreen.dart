@@ -37,9 +37,14 @@ class _AddingsignalState extends State<Addingsignal> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
+              style: TextStyle(fontSize: 18),
               controller: _signaltitlecontroller,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 13.0,
+                  horizontal: 10.0,
+                ),
                 focusColor: Colors.black,
                 filled: true,
                 fillColor: Colors.white,
@@ -93,8 +98,7 @@ class _AddingsignalState extends State<Addingsignal> {
                 ),
                 onPressed: () {
                   onsignalsubmitbuttonpressed();
-                  setState(() {
-                  });
+                  setState(() {});
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => AdminnavbarScreen(
                       passingselectedindex: 1,

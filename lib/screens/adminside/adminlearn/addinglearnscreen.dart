@@ -37,6 +37,7 @@ class _AddinglaernScreenState extends State<AddinglaernScreen> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
+              style: TextStyle(fontSize: 18),
               controller: _learntitlecontroller,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
@@ -53,6 +54,7 @@ class _AddinglaernScreenState extends State<AddinglaernScreen> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
+              style: TextStyle(fontSize: 18),
               controller: _learncontentcontroller,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(

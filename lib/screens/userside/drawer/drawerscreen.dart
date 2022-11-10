@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,19 +33,13 @@ class _SideScreenState extends State<DrawerScreen> {
         .then((value) {
       loggedInuser = UserModel.fromMap(value.data());
       setState(() {});
+      // print(value.toString());
     });
     //
   }
 
   @override
   Widget build(BuildContext context) {
-    // final userData = FirebaseAuth.instance.currentUser;
-    // log(data);
-    // log(name!.email.toString());
-
-    // final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance.currentUser;
-    log(loggedInuser.email.toString());
-
     return Drawer(
       child: ListView(
         children: [
@@ -77,32 +71,59 @@ class _SideScreenState extends State<DrawerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 239, 238, 238),
-                            border: Border.all(
-                                width: 2,
-                                color: const Color.fromARGB(255, 31, 132, 122)),
-                          ),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.camera_alt))),
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 239, 238, 238),
+                          border: Border.all(
+                              width: 2,
+                              color: const Color.fromARGB(255, 31, 132, 122)),
+                        ),
+
+                        child: loggedInuser.photoURL == null
+                            ? const Center(
+                                child: Image(
+                                    image: AssetImage(
+                                        'asset/150-1503945_transparent-user-png-default-user-image-png-png.png')))
+                            : Image(
+                                fit: BoxFit.cover,
+                                image: FileImage(
+                                    File(loggedInuser.photoURL.toString()))),
+                        // child: IconButton(
+                        //     onPressed: () {},
+                        //     icon: const Icon(Icons.camera_alt)),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        '',
-                        style: const TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
-                      ),
+                      loggedInuser.displayName == null
+                          ? Container(
+                              width: 120,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 225, 231, 228),
+                                  borderRadius: BorderRadius.circular(4)),
+                            )
+                          : Text(
+                              loggedInuser.displayName.toString(),
+                              style: const TextStyle(
+                                  fontSize: 22, fontWeight: FontWeight.bold),
+                            ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text('',
-                          style: const TextStyle(
-                            fontSize: 22,
-                          )),
+                      loggedInuser.email == null
+                          ? Container(
+                              width: 200,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 225, 231, 228),
+                                  borderRadius: BorderRadius.circular(4)),
+                            )
+                          : Text(loggedInuser.email.toString(),
+                              style: const TextStyle(
+                                fontSize: 22,
+                              )),
                       const SizedBox(
                         height: 10,
                       ),

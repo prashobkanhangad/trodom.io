@@ -42,9 +42,14 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: TextField(
+                style: TextStyle(fontSize: 18),
                 controller: _markettitlecontroller,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 13.0,
+                    horizontal: 10.0,
+                  ),
                   focusColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
@@ -61,6 +66,10 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
                 controller: _marketnewscontroller,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 13.0,
+                    horizontal: 10.0,
+                  ),
                   focusColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
@@ -76,37 +85,53 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
             Row(
               children: [
                 Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                     // height: MediaQuery.of(context).size.width / 3,
-                    width: MediaQuery.of(context).size.width / 2.4,
+                    width: MediaQuery.of(context).size.width / 2.2,
                     child: Center(
-                        child: TextField(
-                      controller: _dateInputController,
-                      decoration: const InputDecoration(
-                          icon: Icon(
-                            Icons.calendar_today,
-                            color: Color.fromARGB(255, 34, 86, 133),
-                          ),
-                          labelText: "Enter Date"),
-                      readOnly: true,
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime.now(),
-                            lastDate: DateTime(2100));
+                        child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        style: const TextStyle(fontSize: 18),
+                        controller: _dateInputController,
+                        decoration: InputDecoration(
+                            prefixIcon: const Icon(
+                              Icons.calendar_today,
+                              color: Color.fromARGB(255, 34, 86, 133),
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                              horizontal: 10.0,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4)),
+                            // icon: const Icon(
+                            //   Icons.calendar_today,
+                            //   color: Color.fromARGB(255, 34, 86, 133),
+                            // ),
+                            hintText: "Enter Date"),
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2100));
 
-                        if (pickedDate != null) {
-                          print(pickedDate);
-                          String formattedDate =
-                              DateFormat('dd-MM-yyyy').format(pickedDate);
-                          print(formattedDate);
-                          setState(() {
-                            _dateInputController.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {}
-                      },
+                          if (pickedDate != null) {
+                            print(pickedDate);
+                            String formattedDate =
+                                DateFormat('dd-MM-yyyy').format(pickedDate);
+                            print(formattedDate);
+                            setState(() {
+                              _dateInputController.text =
+                                  formattedDate; //set output date to TextField value.
+                            });
+                          } else {}
+                        },
+                      ),
                     ))),
                 Spacer(),
                 const Text(
@@ -120,6 +145,9 @@ class _AddingmarketScreenState extends State<AddingmarketScreen> {
                     },
                     icon: Icon(Icons.camera_alt)),
               ],
+            ),
+            SizedBox(
+              height: 10,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.0),

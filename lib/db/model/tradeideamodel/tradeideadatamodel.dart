@@ -18,10 +18,14 @@ class tradeideamodel {
   @HiveField(4)
   final String id;
 
+  @HiveField(5)
+  final String type;
+
   tradeideamodel(
       {required this.stockname,
       required this.stoploss,
       required this.entryprice,
       required this.targetprice,
-      required this.id});
+      required this.id,
+      required this.type});
 }

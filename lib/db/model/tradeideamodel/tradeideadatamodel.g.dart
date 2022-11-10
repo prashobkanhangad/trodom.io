@@ -22,13 +22,14 @@ class tradeideamodelAdapter extends TypeAdapter<tradeideamodel> {
       entryprice: fields[2] as String,
       targetprice: fields[3] as String,
       id: fields[4] as String,
+      type: fields[5] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, tradeideamodel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.stockname)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class tradeideamodelAdapter extends TypeAdapter<tradeideamodel> {
       ..writeByte(3)
       ..write(obj.targetprice)
       ..writeByte(4)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(5)
+      ..write(obj.type);
   }
 
   @override

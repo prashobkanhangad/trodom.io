@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tradom_io/screens/userside/about/about.dart';
@@ -6,6 +8,7 @@ import 'package:tradom_io/screens/userside/learn/learnscreen.dart';
 import 'package:tradom_io/screens/userside/marketscreen/tabbar.dart';
 import 'package:tradom_io/screens/userside/trades/tradesscreen.dart';
 import 'package:tradom_io/screens/userside/signal/signalscreen.dart';
+import '../../../db/model/usermodel/usermodel.dart';
 import '../drawer/drawerscreen.dart';
 
 class BottomnavScreen extends StatefulWidget {
@@ -25,6 +28,25 @@ class _BottomNavState extends State<BottomnavScreen> {
     const Tabbar(),
     const LearnScreen(),
   ];
+  // User? user = FirebaseAuth.instance.currentUser;
+  // UserModel loggedInuser = UserModel();
+
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+
+  //   super.initState();
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(user!.uid)
+  //       .get()
+  //       .then((value) {
+  //     loggedInuser = UserModel.fromMap(value.data());
+  //     setState(() {});
+  //     // print(value.toString());
+  //   });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

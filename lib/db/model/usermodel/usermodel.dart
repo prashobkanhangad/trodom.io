@@ -9,10 +9,10 @@ class UserModel {
 //recieving data from server
   factory UserModel.fromMap(map) {
     return UserModel(
-        uid: map('uid') as String,
-        email: map('email') as String,
-        displayName: map('displayName') as String,
-        photoURL: map('photoURL') as String);
+        uid: map['uid'],
+        email: map['email'],
+        displayName: map['displayName'],
+        photoURL: map['photoURL']);
   }
 
   // sending data to server
@@ -26,3 +26,4 @@ class UserModel {
     };
   }
 }
+

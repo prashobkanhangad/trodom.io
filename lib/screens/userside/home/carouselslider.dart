@@ -22,52 +22,58 @@ class CarouselsliderScreen extends StatelessWidget {
 
             return CarouselSlider(
               items: [
-                //1st Image of Slider
-                GestureDetector(
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LearninsideScreen(
-                        key,
-                        learnlist[learnlist.length - 1].learntitle,
-                        learnlist[learnlist.length - 1].learncontent,
-                        learnlist[learnlist.length - 1].learnimage),
-                  )),
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.all(6.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                            image: FileImage(File(
-                                learnlist[learnlist.length - 1].learnimage)),
-                            fit: BoxFit.cover,
-                          ),
+                learnlist == null
+                    ? SizedBox()
+                    :
+                    //1st Image of Slider
+                    GestureDetector(
+                        onTap: () =>
+                            Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => LearninsideScreen(
+                              key,
+                              learnlist[learnlist.length - 1].learntitle,
+                              learnlist[learnlist.length - 1].learncontent,
+                              learnlist[learnlist.length - 1].learnimage),
+                        )),
+                        child: Stack(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.all(6.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                image: DecorationImage(
+                                  image: FileImage(File(
+                                      learnlist[learnlist.length - 1]
+                                          .learnimage)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 141.0),
+                              child: Container(
+                                margin: const EdgeInsets.all(6.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.7),
+                                ),
+                                width: double.maxFinite,
+                                height: 20,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, top: 2),
+                                  child: Text(
+                                    learnlist[learnlist.length - 1].learntitle,
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 141.0),
-                        child: Container(
-                          margin: const EdgeInsets.all(6.0),
-                          decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.7),
-                          ),
-                          width: double.maxFinite,
-                          height: 20,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 5, top: 2),
-                            child: Text(
-                              learnlist[learnlist.length - 1].learntitle,
-                              style: const TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
 
                 //2nd Image of Slider
                 GestureDetector(

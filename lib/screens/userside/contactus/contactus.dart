@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:mailto/mailto.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactusScreen extends StatelessWidget {
   const ContactusScreen({super.key});
@@ -19,16 +19,21 @@ class ContactusScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             TextField(
+              style: TextStyle(fontSize: 20),
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 10.0,
+                  ),
                   focusColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(5)),
                   hintText: 'Name',
                   hintStyle: TextStyle(fontSize: 17)),
             ),
@@ -36,13 +41,18 @@ class ContactusScreen extends StatelessWidget {
               height: 15,
             ),
             TextField(
+              style: TextStyle(fontSize: 20),
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 10.0,
+                  ),
                   focusColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(5)),
                   hintText: 'Email',
                   hintStyle: TextStyle(fontSize: 17)),
             ),
@@ -50,40 +60,53 @@ class ContactusScreen extends StatelessWidget {
               height: 15,
             ),
             TextField(
+              style: TextStyle(fontSize: 20),
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 15.0,
+                    horizontal: 10.0,
+                  ),
                   focusColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(5)),
                   hintText: 'Subject',
-                  hintStyle: TextStyle(fontSize: 17)),
+                  hintStyle: const TextStyle(fontSize: 17)),
             ),
             const SizedBox(
               height: 15,
             ),
             SizedBox(
               child: TextField(
+                maxLines: 5,
+                style: const TextStyle(fontSize: 20),
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 10.0,
+                    ),
                     focusColor: Colors.black,
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(5)),
                     hintText: 'Massage',
-                    hintStyle: TextStyle(fontSize: 17)),
+                    hintStyle: const TextStyle(fontSize: 17)),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
                 width: double.maxFinite,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 31, 132, 122),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      launchMailto();
+                    },
                     child: const Text(
                       'Submit',
                       style:
@@ -93,5 +116,18 @@ class ContactusScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+// ...somewhere in your Flutter app...
+  launchMailto() async {
+    final mailtoLink = Mailto(
+      to: ['to@example.com'],
+      cc: ['cc1@example.com', 'cc2@example.com'],
+      subject: 'mailto example subject',
+      body: 'mailto example body',
+    );
+    // Convert the Mailto instance into a string.
+    // Use either Dart's string interpolation
+    // or the toString() method.
   }
 }

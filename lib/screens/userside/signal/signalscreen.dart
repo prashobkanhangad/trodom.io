@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:tradom_io/screens/userside/signal/signalscreeninside.dart';
 
 import '../../../db/function/signal/signalfunctions.dart';
 import '../../../db/model/signalmodel/signaldatamodel.dart';
@@ -30,12 +29,20 @@ class SignalScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
                           width: double.maxFinite,
                           height: 200,
-                          child: Image(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image(
                               fit: BoxFit.cover,
                               // height: 170,
-                              image: FileImage(File(signaldata.signalimage))),
+                              image: FileImage(
+                                File(signaldata.signalimage),
+                              ),
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           height: 5,

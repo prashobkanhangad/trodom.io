@@ -10,6 +10,7 @@ import 'package:tradom_io/db/model/marketmodel/marketdatamodel.dart';
 import 'package:tradom_io/db/model/signalmodel/signaldatamodel.dart';
 import 'package:tradom_io/db/model/tradeideamodel/tradeideadatamodel.dart';
 import 'package:tradom_io/screens/userside/splashscreen/spashscreen.dart';
+import 'package:flutter/services.dart';
 
 // late Box<signalmodel> databasebox;
 // late Box<learnmodel> learndatabasebox;
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       theme: ThemeData(
           backgroundColor: Colors.white,

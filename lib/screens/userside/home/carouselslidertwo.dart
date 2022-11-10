@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,6 +19,9 @@ class CarouselsliderScreen2 extends StatelessWidget {
         builder:
             (BuildContext ctx, List<signalmodel> signallist, Widget? child) {
           final signaldata = signallist[signallist.length - 1];
+
+          // log(signallist[signallist.length - 5].signaltitle);
+
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: CarouselSlider(
@@ -83,7 +87,7 @@ class CarouselsliderScreen2 extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(6.0),
+                        margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
