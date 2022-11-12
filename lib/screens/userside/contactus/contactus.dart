@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:mailto/mailto.dart';
+import 'package:tradom_io/screens/userside/about/about.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactusScreen extends StatelessWidget {
@@ -144,6 +145,9 @@ class ContactusScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       sendEmail();
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AboutScreen(),
+                      ));
                     },
                     child: const Text(
                       'Submit',

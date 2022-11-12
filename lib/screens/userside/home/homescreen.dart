@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
@@ -76,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BottomnavScreen(),
+                        builder: (context) => BottomnavScreen(selectedindex: 0),
                       ));
                     },
                     child: Container(
@@ -169,15 +167,15 @@ class HomeScreen extends StatelessWidget {
                                   ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding:const EdgeInsets.all(8.0),
                             child: Text(
                               marketdata.markettitle,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 19, fontWeight: FontWeight.bold),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Container(
                               height: 180,
                               child: Text(

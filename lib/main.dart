@@ -26,6 +26,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   await Hive.initFlutter();
+  // FirebaseAnalytics.instance.logEvent()
   getlearn();
   getmarket();
   getsignal();

@@ -1,5 +1,6 @@
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 import 'package:tradom_io/screens/adminside/admindrawer/admindrawer.dart';
 import 'package:tradom_io/screens/adminside/adminhome/adminhomescreen.dart';
 import 'package:tradom_io/screens/adminside/adminlearn/adminlearnscreen.dart';
@@ -19,6 +20,13 @@ class AdminnavbarScreen extends StatefulWidget {
 
 class _BottomNavState extends State<AdminnavbarScreen> {
 //  final _currentSelectedIndex =  Widget();
+  @override
+  void initState() {
+    // TODO: implement initState
+    CategoryDB().refreshUI();
+
+    super.initState();
+  }
 
   final pages = [
     AdminTradesScreenTabs(),

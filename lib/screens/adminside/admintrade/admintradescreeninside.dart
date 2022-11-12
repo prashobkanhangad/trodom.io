@@ -40,8 +40,13 @@ class AdmintradeinsideScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          EdittradeideaSCreen(id: id, index: index),
+                      builder: (context) => EdittradeideaSCreen(
+                          id: id,
+                          index: index,
+                          entryprice: entryprice,
+                          stockname: stockname,
+                          stoploss: stoploss,
+                          targetprice: targetprice),
                     )),
                     child: Container(
                       decoration: BoxDecoration(

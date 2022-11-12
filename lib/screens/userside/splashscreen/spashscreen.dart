@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tradom_io/db/function/learn/learnfunctions.dart';
 import 'package:tradom_io/db/function/market/marketfunctions.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
+import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
 
 import '../../../db/function/signal/signalfunctions.dart';
 import '../../../db/model/learn/learndatamodel.dart';
@@ -26,15 +28,15 @@ class _SplashScreenState extends State<SplashScreen> {
     gotoLogin();
     super.initState();
 
-    final tradeideaData = tradeideamodel(
-        entryprice: '130.5',
-        id: '1',
+    final _catogorytrade = CategoryModel(
+        type: CategoryType.intraday,
+        id: '0',
+        entryprice: '225.0',
         stockname: 'Reliance',
-        stoploss: '123.0',
-        targetprice: '152.5',
-        type: '1');
+        stoploss: '200.5',
+        targetprice: '250.5');
 
-    addpredifinedtradeidea(tradeideaData, 1);
+    CategoryDB().insertCategory(_catogorytrade);
 
     String marketimage = 'asset/chart.jpg';
 

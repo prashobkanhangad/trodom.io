@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
-
 import '../../../db/function/tradecategory/tradecategoryfunction.dart';
-import '../../../db/function/tradeideas/tradeidea_functions.dart';
-import '../../../db/model/tradeideamodel/tradeideadatamodel.dart';
+
 
 class LatestTrade extends StatelessWidget {
   const LatestTrade({super.key});

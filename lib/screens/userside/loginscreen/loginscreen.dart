@@ -177,7 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
           .then((uid) => {
                 // Fluttertoast.showToast(msg: "Login Sussesfull"),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => BottomnavScreen(),
+                  builder: (context) => BottomnavScreen(selectedindex: 2),
                 ))
               })
           .catchError((e) {

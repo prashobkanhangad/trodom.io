@@ -13,7 +13,9 @@ import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 import '../drawer/drawerscreen.dart';
 
 class BottomnavScreen extends StatefulWidget {
-  const BottomnavScreen({
+  int selectedindex;
+  BottomnavScreen({
+    required this.selectedindex,
     super.key,
   });
 
@@ -30,7 +32,7 @@ class _BottomNavState extends State<BottomnavScreen> {
     super.initState();
   }
 
-  int _currentSelectedIndex = 2;
+  // int _currentSelectedIndex = widget.selectedindex;
 
   final pages = [
     const TradesScreen(),
@@ -105,13 +107,13 @@ class _BottomNavState extends State<BottomnavScreen> {
       ),
       //If you want to show body behind the navbar, it should be true
       extendBody: true,
-      body: pages[_currentSelectedIndex],
+      body: pages[widget.selectedindex],
       bottomNavigationBar: FloatingNavbar(
         backgroundColor: Color.fromARGB(255, 31, 132, 122),
-        currentIndex: _currentSelectedIndex,
+        currentIndex: widget.selectedindex,
         onTap: (newIndex) {
           setState(() {
-            _currentSelectedIndex = newIndex;
+            widget.selectedindex = newIndex;
           });
         },
         items: [

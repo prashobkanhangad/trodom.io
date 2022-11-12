@@ -10,11 +10,18 @@ import '../../../db/model/tradecategory/tradecategory.dart';
 import '../adminnavbar/adminnavbar.dart';
 
 class EdittradeideaSCreen extends StatefulWidget {
-  final String id;
+  final String stockname, stoploss, entryprice, targetprice, id;
 
   final int index;
 
-  EdittradeideaSCreen({super.key, required this.id, required this.index});
+  EdittradeideaSCreen(
+      {super.key,
+      required this.stockname,
+      required this.stoploss,
+      required this.entryprice,
+      required this.targetprice,
+      required this.id,
+      required this.index});
 
   @override
   State<EdittradeideaSCreen> createState() => _EdittradeideaSCreenState();
@@ -37,11 +44,10 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
         valueListenable: CategoryDB().intradayCategoryListListener,
         builder: (BuildContext ctx, List<CategoryModel> tradeidealist,
             Widget? child) {
-     
-          // _stocknamecontroller.text = tradedata.stockname;
-          // _entrypricecontroller.text = tradedata.entryprice;
-          // _stoplosscontroller.text = tradedata.stoploss;
-          // _targetpricecontroller.text = tradedata.targetprice;
+          _stocknamecontroller.text = widget.stockname;
+          _entrypricecontroller.text = widget.entryprice;
+          _stoplosscontroller.text = widget.stoploss;
+          _targetpricecontroller.text = widget.targetprice;
 
           return Scaffold(
             appBar: AppBar(
@@ -263,7 +269,6 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
       return;
     }
 
-  
     final _catogorytrade = CategoryModel(
         type: _type,
         id: widget.id,

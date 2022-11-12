@@ -227,11 +227,15 @@ class _SideScreenState extends State<DrawerScreen> {
                               title: Text('Are you sure you want to Delete?'),
                               actions: [
                                 TextButton(
-                                    onPressed: () => Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen()),
-                                        ),
+                                    onPressed: () {
+                                      // FirebaseUser user = await FirebaseAuth.instance.currentUser();
+// user.delete();
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
+                                    },
                                     child: Text('Yes')),
                                 TextButton(
                                     onPressed: () =>

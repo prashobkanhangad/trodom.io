@@ -165,7 +165,7 @@ class AdminloginScreen extends StatelessWidget {
       if (emailcontroller.text.trim() == 'admin@gmail.com' &&
           passwordcontroller.text.trim() == '123456')
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AdminnavbarScreen(passingselectedindex: 2),
+          builder: (context) => AdminnavbarScreen(passingselectedindex: 0),
         ));
     }
   }

@@ -1,20 +1,18 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:tradom_io/screens/adminside/adminhome/adminlasttrade.dart';
 import 'package:tradom_io/screens/adminside/adminmarket/adminmarketscreeninside.dart';
 import 'package:tradom_io/screens/userside/home/carouselslider.dart';
 import 'package:tradom_io/screens/userside/home/carouselslidertwo.dart';
-import 'package:tradom_io/screens/userside/marketscreen/marketscreeninside.dart';
 
 import '../../../db/function/market/marketfunctions.dart';
 import '../../../db/model/marketmodel/marketdatamodel.dart';
 
 class AdminhomeScreen extends StatelessWidget {
   const AdminhomeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
