@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -19,6 +20,7 @@ class CarouselsliderScreen extends StatelessWidget {
           builder:
               (BuildContext ctx, List<learnmodel> learnlist, Widget? child) {
             // final leardata = learnlist[learnlist.length - 1];
+            // log(learnlist.length.toString());
 
             return CarouselSlider(
               items: [
@@ -30,10 +32,12 @@ class CarouselsliderScreen extends StatelessWidget {
                         onTap: () =>
                             Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => LearninsideScreen(
-                              key,
-                              learnlist[learnlist.length - 1].learntitle,
-                              learnlist[learnlist.length - 1].learncontent,
-                              learnlist[learnlist.length - 1].learnimage),
+                            key,
+                            learnlist[learnlist.length - 1].learntitle,
+                            learnlist[learnlist.length - 1].learncontent,
+                            learnlist[learnlist.length - 1].learnimage,
+                            learnlist.length - 1,
+                          ),
                         )),
                         child: Stack(
                           children: [
@@ -42,9 +46,12 @@ class CarouselsliderScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                                 image: DecorationImage(
-                                  image: FileImage(File(
-                                      learnlist[learnlist.length - 1]
-                                          .learnimage)),
+                                  image: learnlist.length < 6
+                                      ? const AssetImage('asset/crypto02.png')
+                                          as ImageProvider
+                                      : FileImage(File(
+                                          learnlist[learnlist.length - 1]
+                                              .learnimage)),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -82,7 +89,8 @@ class CarouselsliderScreen extends StatelessWidget {
                         key,
                         learnlist[learnlist.length - 2].learntitle,
                         learnlist[learnlist.length - 2].learncontent,
-                        learnlist[learnlist.length - 2].learnimage),
+                        learnlist[learnlist.length - 2].learnimage,
+                        learnlist.length - 2),
                   )),
                   child: Stack(
                     children: [
@@ -91,8 +99,12 @@ class CarouselsliderScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                            image: FileImage(File(
-                                learnlist[learnlist.length - 2].learnimage)),
+                            image: learnlist.length < 7
+                                ? const AssetImage(
+                                        'asset/Editorial_FII_12-01-21-01-1.png')
+                                    as ImageProvider
+                                : FileImage(File(learnlist[learnlist.length - 2]
+                                    .learnimage)),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -129,17 +141,21 @@ class CarouselsliderScreen extends StatelessWidget {
                         key,
                         learnlist[learnlist.length - 3].learntitle,
                         learnlist[learnlist.length - 3].learncontent,
-                        learnlist[learnlist.length - 3].learnimage),
+                        learnlist[learnlist.length - 3].learnimage,
+                        learnlist.length - 3),
                   )),
                   child: Stack(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(6.0),
+                        margin: const EdgeInsets.all(6.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                            image: FileImage(File(
-                                learnlist[learnlist.length - 3].learnimage)),
+                            image: learnlist.length < 8
+                                ? const AssetImage('asset/ulips.png')
+                                    as ImageProvider
+                                : FileImage(File(learnlist[learnlist.length - 3]
+                                    .learnimage)),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -176,7 +192,8 @@ class CarouselsliderScreen extends StatelessWidget {
                         key,
                         learnlist[learnlist.length - 4].learntitle,
                         learnlist[learnlist.length - 4].learncontent,
-                        learnlist[learnlist.length - 4].learnimage),
+                        learnlist[learnlist.length - 4].learnimage,
+                        learnlist.length - 4),
                   )),
                   child: Stack(
                     children: [
@@ -185,8 +202,11 @@ class CarouselsliderScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                            image: FileImage(File(
-                                learnlist[learnlist.length - 4].learnimage)),
+                            image: learnlist.length < 9
+                                ? const AssetImage('asset/dii.png')
+                                    as ImageProvider
+                                : FileImage(File(learnlist[learnlist.length - 4]
+                                    .learnimage)),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -223,7 +243,8 @@ class CarouselsliderScreen extends StatelessWidget {
                         key,
                         learnlist[learnlist.length - 5].learntitle,
                         learnlist[learnlist.length - 5].learncontent,
-                        learnlist[learnlist.length - 5].learnimage),
+                        learnlist[learnlist.length - 5].learnimage,
+                        learnlist.length - 5),
                   )),
                   child: Stack(
                     children: [
@@ -232,8 +253,12 @@ class CarouselsliderScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                            image: FileImage(File(
-                                learnlist[learnlist.length - 5].learnimage)),
+                            image: learnlist.length < 10
+                                ? const AssetImage(
+                                        'asset/Jargon-Bluechip-Stocks-_23-05-21-01.png')
+                                    as ImageProvider
+                                : FileImage(File(learnlist[learnlist.length - 5]
+                                    .learnimage)),
                             fit: BoxFit.cover,
                           ),
                         ),

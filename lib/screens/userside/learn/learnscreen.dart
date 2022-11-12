@@ -27,35 +27,63 @@ class LearnScreen extends StatelessWidget {
                           key,
                           learndata.learntitle,
                           learndata.learncontent,
-                          learndata.learnimage),
+                          learndata.learnimage,
+                          index),
                     )),
-                    child: Container(
-                      width: double.maxFinite,
-                      // height: 260,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 12.0, right: 12, top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: double.maxFinite,
-                              height: 190,
-                              child: Image(
-                                  fit: BoxFit.cover,
-                                  // height: 170,
-                                  image: FileImage(File(learndata.learnimage))),
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 6.0, right: 6, top: 6),
+                      child: Card(
+                        child: Container(
+                          width: double.maxFinite,
+                          // height: 260,
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 12.0, right: 12, top: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.maxFinite,
+                                  height: 190,
+                                  child: Image(
+                                      fit: BoxFit.cover,
+                                      // height: 170,
+                                      image: index < 1
+                                          ? const AssetImage(
+                                              'asset/Jargon-Bluechip-Stocks-_23-05-21-01.png')
+                                          : index < 2
+                                              ? const AssetImage(
+                                                  'asset/dii.png')
+                                              : index < 3
+                                                  ? const AssetImage(
+                                                      'asset/ulips.png')
+                                                  : index < 4
+                                                      ? const AssetImage(
+                                                          'asset/Editorial_FII_12-01-21-01-1.png')
+                                                      : index < 5
+                                                          ? const AssetImage(
+                                                                  'asset/crypto02.png')
+                                                              as ImageProvider
+                                                          : FileImage(File(
+                                                              learndata
+                                                                  .learnimage))),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                                  child: Text(
+                                    learndata.learntitle,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10.0),
-                              child: Text(
-                                learndata.learntitle,
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            )
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -63,7 +91,7 @@ class LearnScreen extends StatelessWidget {
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(
-                    height: 10,
+                    height: 0,
                   );
                 },
                 itemCount: learnlist.length),

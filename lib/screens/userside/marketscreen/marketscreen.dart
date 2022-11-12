@@ -34,7 +34,7 @@ class MarketScreen extends StatelessWidget {
                               builder: (context) => MarketinsideScreen(
                                   title: marketdata.markettitle,
                                   news: marketdata.marketnews,
-                                  imagenews: marketdata.marketimage),
+                                  imagenews: marketdata.marketimage,id: index),
                             ),
                           );
                         },
@@ -69,8 +69,12 @@ class MarketScreen extends StatelessWidget {
                                       height: 100,
                                       child: Image(
                                           fit: BoxFit.cover,
-                                          image: FileImage(
-                                              File(marketdata.marketimage))),
+                                          image: index < 1
+                                              ? const AssetImage(
+                                                      'asset/beautiful-shot-snowy-mountains-with-dark-blue-sky-scaled.jpg')
+                                                  as ImageProvider
+                                              : FileImage(File(
+                                                  marketdata.marketimage))),
                                     ),
                                     const SizedBox(
                                       width: 5,

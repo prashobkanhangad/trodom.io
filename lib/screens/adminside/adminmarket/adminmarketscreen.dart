@@ -90,14 +90,21 @@ class AdminmarketScreen extends StatelessWidget {
                                       Row(
                                         children: [
                                           Container(
-                                            child: Image(
-                                                fit: BoxFit.cover,
-                                                image: FileImage(File(
-                                                    marketdata.marketimage))),
                                             width: wSize * 0.35,
                                             height: 100,
                                             color: const Color.fromARGB(
                                                 255, 255, 255, 255),
+                                            child: Image(
+                                              fit: BoxFit.cover,
+                                              image: index < 1
+                                                  ? const AssetImage(
+                                                          'asset/chart.jpg')
+                                                      as ImageProvider
+                                                  : FileImage(
+                                                      File(marketdata
+                                                          .marketimage),
+                                                    ),
+                                            ),
                                           ),
                                           const SizedBox(
                                             width: 5,

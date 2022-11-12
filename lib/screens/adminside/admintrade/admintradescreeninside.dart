@@ -1,14 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
 import 'package:tradom_io/screens/adminside/admintrade/edittradescreen.dart';
 
 import '../adminnavbar/adminnavbar.dart';
 
 class AdmintradeinsideScreen extends StatelessWidget {
-  final String stockname, stoploss, entryprice, targetprice;
-  int id;
+  final String stockname, stoploss, entryprice, targetprice, id;
+  final int index;
 
   AdmintradeinsideScreen(
       {super.key,
@@ -16,7 +15,8 @@ class AdmintradeinsideScreen extends StatelessWidget {
       required this.stoploss,
       required this.entryprice,
       required this.targetprice,
-      required this.id});
+      required this.id,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,8 @@ class AdmintradeinsideScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => EdittradeideaSCreen(index: id),
+                      builder: (context) =>
+                          EdittradeideaSCreen(id: id, index: index),
                     )),
                     child: Container(
                       decoration: BoxDecoration(
@@ -75,8 +76,8 @@ class AdmintradeinsideScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () async {
-                              deletetradeidea(id);
-                              log(id.toString());
+                              CategoryDB().deleteCategory(id);
+                              // log(id.toString());
 
                               Navigator.pop(context);
                               Navigator.of(context).push(MaterialPageRoute(

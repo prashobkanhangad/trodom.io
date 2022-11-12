@@ -1,9 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactusScreen extends StatelessWidget {
-  const ContactusScreen({super.key});
+  ContactusScreen({super.key});
+
+  final namecontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  final subjectcontroller = TextEditingController();
+  final messsagecontroller = TextEditingController();
+
+  Future sendEmail() async {
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+
+    const serviceId = 'service_ev88m6p';
+    const templateId = 'template_7l5o5qi';
+
+    const userId = 'wgLlpPyIW1ddnSbVZ';
+
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(
+        {
+          "service_id": serviceId,
+          "template_id": templateId,
+          "user_id": userId,
+          "template_params": {
+            "name": namecontroller.text,
+            "Subject": subjectcontroller.text,
+            "message": messsagecontroller.text,
+            "user_email": emailcontroller.text,
+          }
+        },
+      ),
+    );
+    print('sending mail');
+
+    return response.statusCode;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +131,7 @@ class ContactusScreen extends StatelessWidget {
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    hintText: 'Massage',
+                    hintText: 'Message',
                     hintStyle: const TextStyle(fontSize: 17)),
               ),
             ),
@@ -105,7 +143,7 @@ class ContactusScreen extends StatelessWidget {
                       backgroundColor: Color.fromARGB(255, 31, 132, 122),
                     ),
                     onPressed: () {
-                      launchMailto();
+                      sendEmail();
                     },
                     child: const Text(
                       'Submit',
@@ -118,16 +156,16 @@ class ContactusScreen extends StatelessWidget {
     );
   }
 
-// ...somewhere in your Flutter app...
-  launchMailto() async {
-    final mailtoLink = Mailto(
-      to: ['to@example.com'],
-      cc: ['cc1@example.com', 'cc2@example.com'],
-      subject: 'mailto example subject',
-      body: 'mailto example body',
-    );
-    // Convert the Mailto instance into a string.
-    // Use either Dart's string interpolation
-    // or the toString() method.
-  }
+// // ...somewhere in your Flutter app...
+//   launchMailto() async {
+//     final mailtoLink = Mailto(
+//       to: ['to@example.com'],
+//       cc: ['cc1@example.com', 'cc2@example.com'],
+//       subject: 'mailto example subject',
+//       body: 'mailto example body',
+//     );
+//     // Convert the Mailto instance into a string.
+//     // Use either Dart's string interpolation
+//     // or the toString() method.
+//   }
 }

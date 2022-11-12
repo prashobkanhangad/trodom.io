@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
+import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
 import 'package:tradom_io/db/model/tradeideamodel/tradeideadatamodel.dart';
 import 'package:tradom_io/screens/adminside/admintrade/radiobutton.dart';
 
@@ -14,7 +18,6 @@ class AddingtradeSCreen extends StatefulWidget {
 }
 
 enum SingingCharacter { intraday, positional }
-
 
 class _AddingtradeSCreenState extends State<AddingtradeSCreen> {
   final _stoplosscontroller = TextEditingController();
@@ -87,44 +90,55 @@ class _AddingtradeSCreenState extends State<AddingtradeSCreen> {
                     ),
                   ),
                 ),
-                // TradeScreenmRadiobutton(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10.0, right: 22),
+                  child: Row(
+                    children: const [
+                      TradeScreenmRadiobutton(
+                          title: 'Intraday', type: CategoryType.intraday),
+                      Spacer(),
+                      TradeScreenmRadiobutton(
+                          title: 'Positional', type: CategoryType.positional)
+                    ],
+                  ),
+                ),
 
                 //
 
-                Row(
-                  children: [
-                    Container(
-                      width: 180,
-                      child: ListTile(
-                        title: const Text('Intraday'),
-                        leading: Radio<SingingCharacter>(
-                          value: SingingCharacter.intraday,
-                          groupValue: character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() {
-                              character = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 180,
-                      child: ListTile(
-                        title: const Text('Positional'),
-                        leading: Radio<SingingCharacter>(
-                          value: SingingCharacter.positional,
-                          groupValue: character,
-                          onChanged: (SingingCharacter? value) {
-                            setState(() {
-                              character = value;
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                //     Container(
+                //       width: 180,
+                //       child: ListTile(
+                //         title: const Text('Intraday'),
+                //         leading: Radio<SingingCharacter>(
+                //           value: SingingCharacter.intraday,
+                //           groupValue: character,
+                //           onChanged: (SingingCharacter? value) {
+                //             setState(() {
+                //               character = value;
+                //             });
+                //           },
+                //         ),
+                //       ),
+                //     ),
+                //     Container(
+                //       width: 180,
+                //       child: ListTile(
+                //         title: const Text('Positional'),
+                //         leading: Radio<SingingCharacter>(
+                //           value: SingingCharacter.positional,
+                //           groupValue: character,
+                //           onChanged: (SingingCharacter? value) {
+                //             setState(() {
+                //               character = value;
+                //             });
+                //           },
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
 
                 //
                 SizedBox(),
@@ -263,7 +277,7 @@ class _AddingtradeSCreenState extends State<AddingtradeSCreen> {
     final _entryprice = _entrypricecontroller.text;
     final _targetprice = _targetpricecontroller.text;
     final _stockname = _stocknamecontroller.text;
-    final _type = character;
+    final _type = selectedCategoryNotifier.value;
 
     if (_stoploss.isEmpty ||
         _entryprice.isEmpty ||
@@ -272,13 +286,26 @@ class _AddingtradeSCreenState extends State<AddingtradeSCreen> {
       return;
     }
 
-    final _tradeideas = tradeideamodel(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
+    // final _tradeideas = tradeideamodel(
+    //     id: DateTime.now().microsecondsSinceEpoch.toString(),
+    //     stockname: _stockname,
+    //     stoploss: _stoploss,
+    //     entryprice: _entryprice,
+    //     targetprice: _targetprice,
+    //     type: _type.toString());
+
+    // addtradeidea(_tradeideas);
+
+    final _catogorytrade = CategoryModel(
+        type: _type,
+        id: DateTime.now().millisecondsSinceEpoch.toString(),
+        entryprice: _entryprice,
         stockname: _stockname,
         stoploss: _stoploss,
-        entryprice: _entryprice,
-        targetprice: _targetprice,
-        type: _type.toString());
-    addtradeidea(_tradeideas);
+        targetprice: _targetprice);
+
+    CategoryDB().insertCategory(_catogorytrade);
+
+    // log(_stockname);
   }
 }

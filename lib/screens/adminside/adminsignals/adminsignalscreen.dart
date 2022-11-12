@@ -68,8 +68,12 @@ class AdminsignalScreen extends StatelessWidget {
                                     height: 200,
                                     child: Image(
                                       fit: BoxFit.cover,
-                                      image: FileImage(File(
-                                          signaldata.signalimage.toString())),
+                                      image: index < 5
+                                          ? const AssetImage('asset/chart.jpg')
+                                              as ImageProvider
+                                          : FileImage(File(signaldata
+                                              .signalimage
+                                              .toString())),
                                     )),
                                 const SizedBox(
                                   height: 5,

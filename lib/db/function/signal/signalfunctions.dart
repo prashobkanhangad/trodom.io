@@ -12,6 +12,20 @@ Future<void> addsignal(signalmodel value) async {
   getsignal();
 }
 
+Future<void> addpredifindsignal(signalmodel value) async {
+  final signaldb = await Hive.openBox<signalmodel>('signal_db');
+  signaldb.add(value);
+
+  getsignal();
+}
+
+Future<void> addPredifinedsignal(signalmodel value, index) async {
+  final signaldb = await Hive.openBox<signalmodel>('signal_db');
+  signaldb.put(index, value);
+
+  getsignal();
+}
+
 Future<void> getsignal() async {
   final signaldb = await Hive.openBox<signalmodel>('signal_db');
   signalsnotifier.value.clear();

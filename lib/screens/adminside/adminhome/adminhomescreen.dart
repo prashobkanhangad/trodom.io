@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -138,6 +139,7 @@ class AdminhomeScreen extends StatelessWidget {
             builder: (BuildContext ctx, List<marketmodel> marketlist,
                 Widget? child) {
               final marketdata = marketlist[marketlist.length - 1];
+              // log(marketlist.length.toString());
               return GestureDetector(
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => AdminmarketinsideScreen(
@@ -161,9 +163,13 @@ class AdminhomeScreen extends StatelessWidget {
                           width: double.maxFinite,
                           height: 200,
                           fit: BoxFit.cover,
-                          image: FileImage(
-                            File(marketdata.marketimage),
-                          ),
+                          image: marketlist.length < 2
+                              ? const AssetImage(
+                                      'asset/beautiful-shot-snowy-mountains-with-dark-blue-sky-scaled.jpg')
+                                  as ImageProvider
+                              : FileImage(
+                                  File(marketdata.marketimage),
+                                ),
                         ),
                       ),
                       Padding(

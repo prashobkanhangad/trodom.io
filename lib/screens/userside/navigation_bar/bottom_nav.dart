@@ -8,17 +8,28 @@ import 'package:tradom_io/screens/userside/learn/learnscreen.dart';
 import 'package:tradom_io/screens/userside/marketscreen/tabbar.dart';
 import 'package:tradom_io/screens/userside/trades/tradesscreen.dart';
 import 'package:tradom_io/screens/userside/signal/signalscreen.dart';
-import '../../../db/model/usermodel/usermodel.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
+
 import '../drawer/drawerscreen.dart';
 
 class BottomnavScreen extends StatefulWidget {
-  const BottomnavScreen({super.key});
+  const BottomnavScreen({
+    super.key,
+  });
 
   @override
   State<BottomnavScreen> createState() => _BottomNavState();
 }
 
 class _BottomNavState extends State<BottomnavScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    CategoryDB().refreshUI();
+
+    super.initState();
+  }
+
   int _currentSelectedIndex = 2;
 
   final pages = [

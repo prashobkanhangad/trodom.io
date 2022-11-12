@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:tradom_io/screens/userside/trades/tradescreeninside.dart';
 
-import '../../../db/function/tradeideas/tradeidea_functions.dart';
-import '../../../db/model/tradeideamodel/tradeideadatamodel.dart';
+import 'package:flutter/material.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
+import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
+
 
 class Tradescreenintraday extends StatelessWidget {
   const Tradescreenintraday({super.key});
@@ -21,8 +21,8 @@ class Tradescreenintraday extends StatelessWidget {
         //
 
         child: ValueListenableBuilder(
-          valueListenable: tradeidealistnotifier,
-          builder: (BuildContext ctx, List<tradeideamodel> tradeidealist,
+          valueListenable: CategoryDB().intradayCategoryListListener,
+          builder: (BuildContext ctx, List<CategoryModel> tradeidealist,
               Widget? child) {
             return ListView.separated(
                 itemBuilder: (context, index) {
@@ -32,7 +32,7 @@ class Tradescreenintraday extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 7.0, right: 7, top: 7),
                     child: Card(
                       child: Container(
-                        height: 130,
+                        height: 100,
                         width: double.maxFinite,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -113,30 +113,30 @@ class Tradescreenintraday extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: const [
-                                  Spacer(),
-                                  Text(
-                                    'Trade Status - ',
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 63, 63, 63),
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: 2,
-                                  ),
-                                  Text('Running',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            )
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 10.0),
+                            //   child: Row(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: const [
+                            //       Spacer(),
+                            //       Text(
+                            //         'Trade Status - ',
+                            //         style: TextStyle(
+                            //             color: Color.fromARGB(255, 63, 63, 63),
+                            //             fontSize: 18,
+                            //             fontWeight: FontWeight.bold),
+                            //       ),
+                            //       SizedBox(
+                            //         height: 2,
+                            //       ),
+                            //       Text('Running',
+                            //           style: TextStyle(
+                            //               fontSize: 18,
+                            //               fontWeight: FontWeight.bold)),
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         ),
                       ),

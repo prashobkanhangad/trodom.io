@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tradom_io/db/function/tradeideas/tradeidea_functions.dart';
 import 'package:tradom_io/db/model/tradeideamodel/tradeideadatamodel.dart';
 import 'package:tradom_io/screens/adminside/admintrade/radiobutton.dart';
 
+import '../../../db/function/tradecategory/tradecategoryfunction.dart';
+import '../../../db/model/tradecategory/tradecategory.dart';
 import '../adminnavbar/adminnavbar.dart';
 
 class EdittradeideaSCreen extends StatefulWidget {
-  final index;
-  EdittradeideaSCreen({super.key, required this.index});
+  final String id;
+
+  final int index;
+
+  EdittradeideaSCreen({super.key, required this.id, required this.index});
 
   @override
   State<EdittradeideaSCreen> createState() => _EdittradeideaSCreenState();
 }
-
-enum SingingCharacter { intraday, positional }
 
 class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
   final _stoplosscontroller = TextEditingController();
@@ -27,21 +29,19 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
 
   final _stocknamecontroller = TextEditingController();
 
-  SingingCharacter? character = SingingCharacter.intraday;
-
   @override
   Widget build(BuildContext context) {
     final wSize = MediaQuery.of(context).size.width;
 
     return ValueListenableBuilder(
-        valueListenable: tradeidealistnotifier,
-        builder: (BuildContext ctx, List<tradeideamodel> tradeidealist,
+        valueListenable: CategoryDB().intradayCategoryListListener,
+        builder: (BuildContext ctx, List<CategoryModel> tradeidealist,
             Widget? child) {
-          final tradedata = tradeidealist[widget.index];
-          _stocknamecontroller.text = tradedata.stockname;
-          _entrypricecontroller.text = tradedata.entryprice;
-          _stoplosscontroller.text = tradedata.stoploss;
-          _targetpricecontroller.text = tradedata.targetprice;
+     
+          // _stocknamecontroller.text = tradedata.stockname;
+          // _entrypricecontroller.text = tradedata.entryprice;
+          // _stoplosscontroller.text = tradedata.stoploss;
+          // _targetpricecontroller.text = tradedata.targetprice;
 
           return Scaffold(
             appBar: AppBar(
@@ -99,39 +99,18 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
                     ),
                     //
 
-                    Row(
-                      children: [
-                        Container(
-                          width: 180,
-                          child: ListTile(
-                            title: const Text('Intraday'),
-                            leading: Radio<SingingCharacter>(
-                              value: SingingCharacter.intraday,
-                              groupValue: character,
-                              onChanged: (SingingCharacter? value) {
-                                setState(() {
-                                  character = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 180,
-                          child: ListTile(
-                            title: const Text('Positional'),
-                            leading: Radio<SingingCharacter>(
-                              value: SingingCharacter.positional,
-                              groupValue: character,
-                              onChanged: (SingingCharacter? value) {
-                                setState(() {
-                                  character = value;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 22),
+                      child: Row(
+                        children: const [
+                          TradeScreenmRadiobutton(
+                              title: 'Intraday', type: CategoryType.intraday),
+                          Spacer(),
+                          TradeScreenmRadiobutton(
+                              title: 'Positional',
+                              type: CategoryType.positional)
+                        ],
+                      ),
                     ),
 
                     //
@@ -242,7 +221,7 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
                           width: 150,
                           child: ElevatedButton(
                               onPressed: () {
-                                ontradingsubmitbuttonpressed(widget.index);
+                                ontradingsubmitbuttonpressed(widget.id);
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => AdminnavbarScreen(
                                     passingselectedindex: 0,
@@ -275,7 +254,7 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
     final _entryprice = _entrypricecontroller.text;
     final _targetprice = _targetpricecontroller.text;
     final _stockname = _stocknamecontroller.text;
-    final _type = character;
+    final _type = selectedCategoryNotifier.value;
 
     if (_stoploss.isEmpty ||
         _entryprice.isEmpty ||
@@ -284,16 +263,15 @@ class _EdittradeideaSCreenState extends State<EdittradeideaSCreen> {
       return;
     }
 
-    final _tradeideas = tradeideamodel(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
+  
+    final _catogorytrade = CategoryModel(
+        type: _type,
+        id: widget.id,
+        entryprice: _entryprice,
         stockname: _stockname,
         stoploss: _stoploss,
-        entryprice: _entryprice,
-        targetprice: _targetprice,
-        type: _type.toString());
+        targetprice: _targetprice);
 
-    await tradeideadb.putAt(index, _tradeideas);
-
-    gettradeidea();
+    CategoryDB().insertCategory(_catogorytrade);
   }
 }

@@ -122,7 +122,20 @@ class AdminlearninsideScreen extends StatelessWidget {
             width: double.maxFinite,
             child: Image(
               fit: BoxFit.cover,
-              image: FileImage(File(imagelearn.toString())),
+              image: id < 1
+                  ? const AssetImage(
+                      'asset/Jargon-Bluechip-Stocks-_23-05-21-01.png')
+                  : id < 2
+                      ? const AssetImage('asset/dii.png')
+                      : id < 3
+                          ? const AssetImage('asset/ulips.png')
+                          : id < 4
+                              ? const AssetImage(
+                                  'asset/Editorial_FII_12-01-21-01-1.png')
+                              : id < 5
+                                  ? const AssetImage('asset/crypto02.png')
+                                      as ImageProvider
+                                  : FileImage(File(imagelearn.toString())),
             ),
           ),
           Padding(

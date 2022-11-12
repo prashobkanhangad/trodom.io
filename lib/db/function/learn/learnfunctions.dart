@@ -11,6 +11,12 @@ Future<void> addlearn(learnmodel value) async {
   learnnotifier.notifyListeners();
   getlearn();
 }
+Future<void> addPredifinedlearn(learnmodel value, index) async {
+  final learndb = await Hive.openBox<learnmodel>('learn_db');
+  learndb.put(index,value);
+
+  getlearn();
+}
 
 Future<void> getlearn() async {
   final learndb = await Hive.openBox<learnmodel>('learn_db');

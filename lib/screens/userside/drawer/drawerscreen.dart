@@ -143,28 +143,28 @@ class _SideScreenState extends State<DrawerScreen> {
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Column(
                     children: [
-                      GestureDetector(
-                        onTap: () =>
-                            Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PaymentScreen(),
-                        )),
-                        child: Row(
-                          children: const [
-                            Icon(
-                              Icons.tv,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text('Subscribe Tutorials',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold))
-                          ],
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: () =>
+                      //       Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => PaymentScreen(),
+                      //   )),
+                      //   child: Row(
+                      //     children: const [
+                      //       Icon(
+                      //         Icons.tv,
+                      //         size: 20,
+                      //       ),
+                      //       SizedBox(
+                      //         width: 10,
+                      //       ),
+                      //       Text('Subscribe Tutorials',
+                      //           style: TextStyle(
+                      //               fontSize: 20, fontWeight: FontWeight.bold))
+                      //     ],
+                      //   ),
+                      // ),
                       const SizedBox(
-                        height: 15,
+                        height: 25,
                       ),
                       GestureDetector(
                         child: Row(

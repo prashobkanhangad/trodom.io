@@ -1,7 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
 
+import '../../../db/function/tradecategory/tradecategoryfunction.dart';
 import '../../../db/function/tradeideas/tradeidea_functions.dart';
 import '../../../db/model/tradeideamodel/tradeideadatamodel.dart';
 
@@ -13,11 +13,11 @@ class LatestTrade extends StatelessWidget {
     final wSize = MediaQuery.of(context).size.width;
 
     return ValueListenableBuilder(
-        valueListenable: tradeidealistnotifier,
-        builder: (BuildContext ctx, List<tradeideamodel> tradeidealist,
+        valueListenable: CategoryDB().intradayCategoryListListener,
+        builder: (BuildContext ctx, List<CategoryModel> tradeidealist,
             Widget? child) {
           final tradedata = tradeidealist[tradeidealist.length - 1];
-          log(tradedata.id);
+          // log(tradedata.id);
           {
             return Container(
               height: 85,

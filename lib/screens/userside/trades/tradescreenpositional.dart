@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tradom_io/db/function/tradecategory/tradecategoryfunction.dart';
 
 import '../../../db/function/tradeideas/tradeidea_functions.dart';
+import '../../../db/model/tradecategory/tradecategory.dart';
 import '../../../db/model/tradeideamodel/tradeideadatamodel.dart';
 
 class Tradescreenpostional extends StatelessWidget {
@@ -21,8 +23,8 @@ class Tradescreenpostional extends StatelessWidget {
         //
 
         child: ValueListenableBuilder(
-          valueListenable: tradeidealistnotifier,
-          builder: (BuildContext ctx, List<tradeideamodel> tradeidealist,
+          valueListenable: CategoryDB().positionalCategoryListListener,
+          builder: (BuildContext ctx, List<CategoryModel> tradeidealist,
               Widget? child) {
             return ListView.separated(
                 itemBuilder: (context, index) {

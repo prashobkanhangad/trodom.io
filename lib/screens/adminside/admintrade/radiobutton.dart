@@ -1,58 +1,38 @@
-// import 'dart:developer';
+import 'package:flutter/material.dart';
+import 'package:tradom_io/db/model/tradecategory/tradecategory.dart';
 
-// import 'package:flutter/material.dart';
+ValueNotifier<CategoryType> selectedCategoryNotifier =
+    ValueNotifier(CategoryType.intraday);
 
-// enum SingingCharacter { intraday, positional }
+class TradeScreenmRadiobutton extends StatelessWidget {
+  final String title;
+  final CategoryType type;
 
-// class TradeScreenmRadiobutton extends StatefulWidget {
-//   const TradeScreenmRadiobutton({super.key, required super.character});
+  const TradeScreenmRadiobutton(
+      {super.key, required this.title, required this.type});
 
-//   @override
-//   State<TradeScreenmRadiobutton> createState() => _MyStatefulWidgetState();
-// }
-
-// class _MyStatefulWidgetState extends State<TradeScreenmRadiobutton> {
-//   SingingCharacter? character = SingingCharacter.intraday;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // log(character.toString());
-
-//     return 
-    
-//     Row(
-//       children: [
-//         Container(
-//           width: 180,
-//           child: ListTile(
-//             title: const Text('Intraday'),
-//             leading: Radio<SingingCharacter>(
-//               value: SingingCharacter.intraday,
-//               groupValue: character,
-//               onChanged: (SingingCharacter? value) {
-//                 setState(() {
-//                   character = value;
-//                 });
-//               },
-//             ),
-//           ),
-//         ),
-//         Container(
-//           width: 180,
-//           child: ListTile(
-//             title: const Text('Positional'),
-//             leading: Radio<SingingCharacter>(
-//               value: SingingCharacter.positional,
-//               groupValue: character,
-//               onChanged: (SingingCharacter? value) {
-//                 setState(() {
-//                   character = value;
-//                 });
-//               },
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        ValueListenableBuilder(
+          valueListenable: selectedCategoryNotifier,
+          builder: (BuildContext ctx, CategoryType newCategory, Widget? _) {
+            return Radio<CategoryType>(
+              value: type,
+              groupValue: selectedCategoryNotifier.value,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+                selectedCategoryNotifier.value = value;
+                selectedCategoryNotifier.notifyListeners();
+              },
+            );
+          },
+        ),
+        Text(title)
+      ],
+    );
+  }
+}

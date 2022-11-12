@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class MarketinsideScreen extends StatelessWidget {
   final String title, news, imagenews;
+  final int? id;
 
   const MarketinsideScreen(
       {super.key,
       required this.title,
       required this.news,
-      required this.imagenews});
+      required this.imagenews,
+      this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,11 @@ class MarketinsideScreen extends StatelessWidget {
             width: double.maxFinite,
             child: Image(
               fit: BoxFit.cover,
-              image: FileImage(File(imagenews)),
+              image: id! < 1
+                  ? const AssetImage(
+                          'asset/beautiful-shot-snowy-mountains-with-dark-blue-sky-scaled.jpg')
+                      as ImageProvider
+                  : FileImage(File(imagenews)),
             ),
           ),
           Padding(

@@ -29,6 +29,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => TutorialScrenn(),
     ));
+    // log(response.signature.toString());
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -46,14 +47,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Widget build(BuildContext context) {
     amountcontroller.text = amount;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 31, 132, 122),
-        title: const Text('Tradom.io',
-            style: TextStyle(fontFamily: 'bauhaus', fontSize: 25)),
-        centerTitle: true,
-      ),
       body: Column(
         children: [
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            'You need to pay for tutorial video access',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 31, 132, 122)),
+          ),
+          Divider(),
+          SizedBox(
+            height: 20,
+          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextFormField(

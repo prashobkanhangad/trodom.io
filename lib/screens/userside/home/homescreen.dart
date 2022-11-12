@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,6 +7,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:tradom_io/screens/userside/home/carouselslider.dart';
 import 'package:tradom_io/screens/userside/home/carouselslidertwo.dart';
 import 'package:tradom_io/screens/userside/home/latesttrade.dart';
+import 'package:tradom_io/screens/userside/navigation_bar/bottom_nav.dart';
 
 import '../../../db/function/market/marketfunctions.dart';
 import '../../../db/model/marketmodel/marketdatamodel.dart';
@@ -17,11 +19,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('asset/background_graphics.jpg'),
-            fit: BoxFit.cover),
-      ),
+      decoration: const BoxDecoration(color: Color.fromARGB(255, 239, 247, 246)
+          // image: DecorationImage(
+          //     image: AssetImage('asset/background_graphics.jpg'),
+          //     fit: BoxFit.cover),
+          ),
       child: ListView(children: [
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -73,7 +75,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('object');
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => BottomnavScreen(),
+                      ));
                     },
                     child: Container(
                       width: 55,
@@ -134,12 +138,14 @@ class HomeScreen extends StatelessWidget {
                 builder: (BuildContext ctx, List<marketmodel> marketlist,
                     Widget? child) {
                   final marketdata = marketlist[marketlist.length - 1];
+                  // print(marketdata.marketimage);
                   return GestureDetector(
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => MarketinsideScreen(
-                          title: marketdata.markettitle,
-                          news: marketdata.marketnews,
-                          imagenews: marketdata.marketimage),
+                        title: marketdata.markettitle,
+                        news: marketdata.marketnews,
+                        imagenews: marketdata.marketimage,
+                      ),
                     )),
                     child: Container(
                       decoration: const BoxDecoration(
@@ -154,9 +160,13 @@ class HomeScreen extends StatelessWidget {
                             height: 200,
                             width: double.maxFinite,
                             fit: BoxFit.cover,
-                            image: FileImage(
-                              File(marketdata.marketimage),
-                            ),
+                            image: marketlist.length < 2
+                                ? const AssetImage(
+                                        'asset/beautiful-shot-snowy-mountains-with-dark-blue-sky-scaled.jpg')
+                                    as ImageProvider
+                                : FileImage(
+                                    File(marketdata.marketimage),
+                                  ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),

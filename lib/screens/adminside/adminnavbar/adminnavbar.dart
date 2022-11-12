@@ -6,11 +6,10 @@ import 'package:tradom_io/screens/adminside/adminlearn/adminlearnscreen.dart';
 import 'package:tradom_io/screens/adminside/adminmarket/adminmarketscreen.dart';
 import 'package:tradom_io/screens/adminside/admintrade/admintradescreen.dart';
 import 'package:tradom_io/screens/adminside/adminsignals/adminsignalscreen.dart';
-
+import 'package:tradom_io/screens/adminside/admintrade/admintradesscreentabs.dart';
 
 class AdminnavbarScreen extends StatefulWidget {
   int passingselectedindex;
-
 
   AdminnavbarScreen({super.key, required this.passingselectedindex});
 
@@ -18,13 +17,12 @@ class AdminnavbarScreen extends StatefulWidget {
   State<AdminnavbarScreen> createState() => _BottomNavState();
 }
 
-
 class _BottomNavState extends State<AdminnavbarScreen> {
 //  final _currentSelectedIndex =  Widget();
 
-
   final pages = [
-    AdmintradesScreen(),
+    AdminTradesScreenTabs(),
+    // AdmintradesScreen(),
     AdminsignalScreen(),
     AdminhomeScreen(),
     AdminmarketScreen(),

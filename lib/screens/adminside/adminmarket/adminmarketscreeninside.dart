@@ -121,7 +121,9 @@ class AdminmarketinsideScreen extends StatelessWidget {
             width: double.maxFinite,
             child: Image(
               fit: BoxFit.cover,
-              image: FileImage(File(imagenews.toString())),
+              image: id < 1
+                  ? const AssetImage('asset/chart.jpg') as ImageProvider
+                  : FileImage(File(imagenews.toString())),
             ),
           ),
           Padding(

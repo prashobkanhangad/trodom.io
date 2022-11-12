@@ -91,11 +91,13 @@ class _TrackRecordState extends State<TrackRecord> {
                                     animation: true,
                                     animationDuration: 1000,
                                     lineHeight: 7.0,
-                                    percent: 0.55,
+                                    percent: 0.5 ,
                                     // center: Text("20.0%"),
                                     progressColor:
                                         const Color.fromARGB(255, 0, 255, 8),
-                                    trailing: const Text('11'),
+                                    trailing: Text((tradeidealist.length / 2)
+                                        .toInt()
+                                        .toString()),
                                   ),
                                 ),
                               ],
@@ -117,10 +119,12 @@ class _TrackRecordState extends State<TrackRecord> {
                                     animation: true,
                                     animationDuration: 1000,
                                     lineHeight: 7.0,
-                                    percent: 0.3,
+                                    percent: 0.5,
                                     // center: Text("20.0%"),
                                     progressColor: Colors.red,
-                                    trailing: const Text('6'),
+                                    trailing: Text((tradeidealist.length / 2)
+                                        .toInt()
+                                        .toString()),
                                   ),
                                 ),
                               ],
@@ -161,19 +165,23 @@ class _TrackRecordState extends State<TrackRecord> {
                   ),
                   Card(
                       child: Container(
-                    height: 380,
+                    height: 360,
                     child: LineChart(
                       LineChartData(
                           maxX: 30,
-                          maxY: 4,
+                          maxY: 8,
                           minX: 0,
-                          minY: -4,
+                          minY: -2,
                           lineBarsData: [
                             LineChartBarData(spots: [
                               const FlSpot(0, 0),
-                              const FlSpot(2, 4),
-                              const FlSpot(3, -3),
-                              const FlSpot(4, 3)
+                              const FlSpot(2, 2),
+                              const FlSpot(6, 3),
+                              const FlSpot(7, 4),
+                              const FlSpot(9, 5),
+                              const FlSpot(12, 6),
+                              const FlSpot(16, 7),
+                              const FlSpot(20, 7)
                             ], isCurved: true),
                           ]),
                     ),
