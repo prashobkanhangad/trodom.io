@@ -1,9 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:tradom_io/db/function/signal/signalfunctions.dart';
 import 'package:tradom_io/screens/adminside/adminnavbar/adminnavbar.dart';
-import 'package:tradom_io/screens/adminside/adminsignals/adminsignalscreen.dart';
 import 'package:tradom_io/screens/adminside/adminsignals/editsignalscreen.dart';
 
 class AdminsignalinsideScreen extends StatelessWidget {
@@ -18,6 +18,7 @@ class AdminsignalinsideScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 34, 86, 133),
@@ -123,7 +124,9 @@ class AdminsignalinsideScreen extends StatelessWidget {
               width: double.maxFinite,
               child: Image(
                 fit: BoxFit.cover,
-                image: FileImage(File(signalimage)),
+                image: id < 5
+                    ? const AssetImage('asset/chart.jpg') as ImageProvider
+                    : FileImage(File(signalimage)),
               ),
             ),
           ),

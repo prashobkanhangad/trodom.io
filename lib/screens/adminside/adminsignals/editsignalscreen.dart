@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -37,13 +38,14 @@ class _AddingsignalState extends State<EditsignalScreen> {
             (BuildContext ctx, List<signalmodel> signallist, Widget? child) {
           final signaldata = signallist[signallist.length - 1];
           final index = widget.index;
-
           _signaltitlecontroller.text =
               signalsnotifier.value[index].signaltitle;
 
-          signalimagefile = signalsnotifier.value[index].signalimage;
-
           // log(signalsnotifier.value[index].signalimage);
+
+          final signalimage = widget.signalimage;
+
+          // log(widget.signalimage);
 
           return Scaffold(
             appBar: AppBar(
@@ -70,6 +72,23 @@ class _AddingsignalState extends State<EditsignalScreen> {
 
                       hintStyle: TextStyle(fontSize: 17),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all()),
+                    height: 200,
+                    width: double.maxFinite,
+                    child: Image(
+                        fit: BoxFit.cover,
+                        image: index < 5
+                            ? AssetImage('asset/chart.jpg') as ImageProvider
+                            : FileImage(
+                                File(signalimage),
+                              )),
                   ),
                 ),
                 Padding(

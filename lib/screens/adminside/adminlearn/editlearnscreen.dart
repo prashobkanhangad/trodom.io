@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -21,6 +21,7 @@ class _EditlearnScreenState extends State<EditlearnScreen> {
 
   final _learncontentcontroller = TextEditingController();
 
+  // ignore: prefer_typing_uninitialized_variables
   var learnimagefile;
 
   @override
@@ -75,6 +76,32 @@ class _EditlearnScreenState extends State<EditlearnScreen> {
                           borderRadius: BorderRadius.circular(4)),
                       hintText: 'Add Content Here',
                       hintStyle: const TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 13.0),
+                  child: Container(
+                    height: 230,
+                    width: double.maxFinite,
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: index < 1
+                          ? const AssetImage(
+                              'asset/Jargon-Bluechip-Stocks-_23-05-21-01.png')
+                          : index < 2
+                              ? const AssetImage('asset/dii.png')
+                              : index < 3
+                                  ? const AssetImage('asset/ulips.png')
+                                  : index < 4
+                                      ? const AssetImage(
+                                          'asset/Editorial_FII_12-01-21-01-1.png')
+                                      : index < 5
+                                          ? const AssetImage(
+                                                  'asset/crypto02.png')
+                                              as ImageProvider
+                                          : FileImage(
+                                              File(learnimagefile.toString())),
                     ),
                   ),
                 ),

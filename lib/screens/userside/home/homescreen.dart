@@ -143,6 +143,7 @@ class HomeScreen extends StatelessWidget {
                         title: marketdata.markettitle,
                         news: marketdata.marketnews,
                         imagenews: marketdata.marketimage,
+                        id: marketlist.length - 1,
                       ),
                     )),
                     child: Container(
@@ -167,7 +168,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                           ),
                           Padding(
-                            padding:const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
                             child: Text(
                               marketdata.markettitle,
                               style: const TextStyle(
@@ -175,7 +176,8 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Container(
                               height: 180,
                               child: Text(

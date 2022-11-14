@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -13,13 +14,18 @@ var marketimagefile;
 
 class EditmarketScreen extends StatefulWidget {
   final index;
-  EditmarketScreen({super.key, required this.index});
+  EditmarketScreen({
+    super.key,
+    required this.index,
+  });
 
   @override
   State<EditmarketScreen> createState() => _AddingmarketScreenState();
 }
 
 class _AddingmarketScreenState extends State<EditmarketScreen> {
+//  final imagenews = widget.Image;
+
   final _markettitlecontroller = TextEditingController();
 
   final _marketnewscontroller = TextEditingController();
@@ -34,7 +40,7 @@ class _AddingmarketScreenState extends State<EditmarketScreen> {
             (BuildContext ctx, List<marketmodel> marketlist, Widget? child) {
           final marketdata = marketlist[marketlist.length - 1];
           final index = widget.index;
-          
+
           // log(index);
 
           _markettitlecontroller.text = marketnotifier.value[index].markettitle;
@@ -128,6 +134,21 @@ class _AddingmarketScreenState extends State<EditmarketScreen> {
                     ],
                   ),
 
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Container(
+                      height: 200,
+                      width: double.maxFinite,
+                      child: Image(
+                        fit: BoxFit.cover,
+                        image: index < 1
+                            ? const AssetImage('asset/chart.jpg')
+                                as ImageProvider
+                            : FileImage(File(marketimagefile.toString())),
+                      ),
+                    ),
+                  ),
+
                   //
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -148,6 +169,7 @@ class _AddingmarketScreenState extends State<EditmarketScreen> {
                       ],
                     ),
                   ),
+
                   SizedBox(
                       width: 150,
                       child: ElevatedButton(
