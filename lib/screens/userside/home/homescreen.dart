@@ -6,7 +6,6 @@ import 'package:tradom_io/screens/userside/home/carouselslider.dart';
 import 'package:tradom_io/screens/userside/home/carouselslidertwo.dart';
 import 'package:tradom_io/screens/userside/home/latesttrade.dart';
 import 'package:tradom_io/screens/userside/navigation_bar/bottom_nav.dart';
-
 import '../../../db/function/market/marketfunctions.dart';
 import '../../../db/model/marketmodel/marketdatamodel.dart';
 import '../marketscreen/marketscreeninside.dart';
@@ -220,3 +219,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+//home
